@@ -2,7 +2,7 @@
 from django.contrib.auth.models import User, Group
 from rest_framework import viewsets
 from rest_framework import permissions
-from Rem_Site_Hero.info_api.mySerializers import *
+from info_api.mySerializers import *
 
 
 class PersonViewSet(viewsets.ModelViewSet):
