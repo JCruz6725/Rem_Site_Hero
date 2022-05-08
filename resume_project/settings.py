@@ -54,7 +54,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
-    'resume_project.info_api'
+    'Rem_Site_Hero.resume_project.info_api'
 ]
 
 MIDDLEWARE = [
