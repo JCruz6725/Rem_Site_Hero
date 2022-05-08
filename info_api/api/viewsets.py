@@ -4,4 +4,4 @@ from rest_framework import viewsets
 
 class PersonViewSet(viewsets.ModelViewSet):
     queryset = Person.objects.all()
-    serializer_class = SnippetSerializer
+    serializer_class = PersonSerializer
