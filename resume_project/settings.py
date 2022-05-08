@@ -29,13 +29,13 @@ DEBUG = True
 ALLOWED_HOSTS = ['evening-coast-33004.herokuapp.com']
 
 
-
+'''
 REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': [
         'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'
     ]
 }
-
+'''
 
 
 
