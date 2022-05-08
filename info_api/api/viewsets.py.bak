@@ -1,0 +1,2 @@
+from info_api.models import *
+from  .serializers import *
