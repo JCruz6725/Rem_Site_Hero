@@ -43,9 +43,6 @@ REST_FRAMEWORK = {
 
 
 
-
-
-
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -55,7 +52,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     #'resume_project.info_api',
-    'resume_project.info_api.apps.InfoApiConfig',
+    'info_api.apps.InfoApiConfig',
 ]
 
 MIDDLEWARE = [
