@@ -16,7 +16,7 @@ class Resume (models.Model):
 
 
 class Education (models.Model):
-    person_email = models.ForeignKey(Person, related='education', on_delete=models.CASCADE)
+    person_email = models.ForeignKey(Person, related_name='education', on_delete=models.CASCADE)
     institution_name = models.CharField(max_length=32)
     degree = models.CharField(max_length=32)
     time_at = models.CharField(max_length=32)
