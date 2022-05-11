@@ -2,6 +2,12 @@ from rest_framework import serializers
 from info_api.models import *
 
 
+class ResumeSerializer (serializers.ModelSerializer):
+    class Meta:
+        model = Resume
+        fields = ['title', 'summary', 'skills', 'related_courses']
+
+
 class PersonSerializer (serializers.ModelSerializer):
         resume = ResumeSerializer(many = True, read_only = True)
         class Meta: 
@@ -11,10 +17,7 @@ class PersonSerializer (serializers.ModelSerializer):
             #full_name = serializers.CharField(required=True, allow_blank=False, max_length=32)
             #email = serializers.CharField(required=True, allow_blank=False, max_length=32)
 
-class ResumeSerializer (serializers.ModelSerializer):
-    class Meta:
-        model = Resume
-        fields = ['title', 'summary', 'skills', 'related_courses']
+
 
 
 
