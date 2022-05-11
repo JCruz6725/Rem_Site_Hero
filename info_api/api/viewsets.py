@@ -9,3 +9,9 @@ class PersonViewSet(viewsets.ReadOnlyModelViewSet):
 class ResumeViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = Resume.objects.all()
     serializer_class = ResumeSerializer
+
+class EducationViewSet(viewsets.ReadOnlyModelViewSet):
+    queryset = Education.objects.all()
+    serializer_class = EducationSerializer
+
+
