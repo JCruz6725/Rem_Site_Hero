@@ -12,7 +12,7 @@ class PersonSerializer (serializers.ModelSerializer):
         resume = ResumeSerializer(many = True, read_only = True)
         class Meta: 
             model = Person
-            fields = ['full_name', 'email']
+            fields = ['full_name', 'email', 'resume']
 
             #full_name = serializers.CharField(required=True, allow_blank=False, max_length=32)
             #email = serializers.CharField(required=True, allow_blank=False, max_length=32)
