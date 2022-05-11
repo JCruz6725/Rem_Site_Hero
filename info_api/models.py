@@ -5,10 +5,11 @@ from django.db import models
 class Person (models.Model):
     full_name = models.CharField(max_length=32)
     email = models.CharField(max_length=32)
+    resume_title = models.ForeignKey(Resume, on_delete=models.CASCADE)
 
 
 class Resume (models.Model):
-    person_email = models.ForeignKey(Person, on_delete=models.CASCADE)
+    #person_email = models.ForeignKey(Person, on_delete=models.CASCADE)
     title = models.CharField(max_length=32)
     summary = models.CharField(max_length=512)
     skills = models.CharField(max_length=512)
