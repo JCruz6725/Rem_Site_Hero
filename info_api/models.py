@@ -16,14 +16,14 @@ class Resume (models.Model):
 
 
 class Education (models.Model):
-    person_email = models.ForeignKey(Person, on_delete=models.CASCADE)
+    person_email = models.ForeignKey(Person, related='education' on_delete=models.CASCADE)
     institution_name = models.CharField(max_length=32)
     degree = models.CharField(max_length=32)
     time_at = models.CharField(max_length=32)
  
  
 class Project (models.Model):
-    person_email = models.ForeignKey(Person, on_delete=models.CASCADE)
+    person_email = models.ForeignKey(Person, related_name='project' on_delete=models.CASCADE)
     # May need to change...
     #resume_title = models.ForeignKey(Resume, on_delete=models.CASCADE)
     project_name = models.CharField(max_length=32)
@@ -33,7 +33,7 @@ class Project (models.Model):
  
  
 class Professional (models.Model):
-    person_email = models.ForeignKey(Person, on_delete=models.CASCADE)
+    person_email = models.ForeignKey(Person, related_name='professional' on_delete=models.CASCADE)
     #resume_title  = models.ForeignKey(Resume, on_delete=models.CASCADE)
     employer_name = models.CharField(max_length=32)
     time_at = models.CharField(max_length=32)
