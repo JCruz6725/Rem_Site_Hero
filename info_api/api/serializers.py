@@ -4,9 +4,9 @@ from info_api.models import *
 
 class PersonSerializer (serializers.ModelSerializer):
         resume = ResumeSerializer(many = True, read_only = True)
-    class Meta: 
-        model = Person
-        fields = ['full_name', 'email']
+        class Meta: 
+            model = Person
+            fields = ['full_name', 'email']
 
 
     full_name = serializers.CharField(required=True, allow_blank=False, max_length=32)
