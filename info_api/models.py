@@ -2,10 +2,6 @@ from django.db import models
 
 #refer to DB ralation diagram for full explination
 
-class Person (models.Model):
-    full_name = models.CharField(max_length=32)
-    email = models.CharField(max_length=32)
-    resume_title = models.ForeignKey(Resume, on_delete=models.CASCADE)
 
 
 class Resume (models.Model):
@@ -14,6 +10,12 @@ class Resume (models.Model):
     summary = models.CharField(max_length=512)
     skills = models.CharField(max_length=512)
     related_courses = models.CharField(max_length=512)
+
+
+class Person (models.Model):
+    full_name = models.CharField(max_length=32)
+    email = models.CharField(max_length=32)
+    resume_title = models.ForeignKey(Resume, on_delete=models.CASCADE)
 
 
 class Education (models.Model):
