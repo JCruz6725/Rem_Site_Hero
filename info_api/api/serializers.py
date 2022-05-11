@@ -8,9 +8,8 @@ class PersonSerializer (serializers.ModelSerializer):
             model = Person
             fields = ['full_name', 'email']
 
-
-    full_name = serializers.CharField(required=True, allow_blank=False, max_length=32)
-    email = serializers.CharField(required=True, allow_blank=False, max_length=32)
+            #full_name = serializers.CharField(required=True, allow_blank=False, max_length=32)
+            #email = serializers.CharField(required=True, allow_blank=False, max_length=32)
 
 class ResumeSerializer (serializers.ModelSerializer):
     class Meta:
