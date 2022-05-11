@@ -3,28 +3,15 @@ from info_api.models import *
 
 
 
-
-
-class ResumeSerializer (serializers.ModelSerializer):
-    class Meta:
-        model = Resume
-        fields = ('title', 'summary', 'skills', 'related_courses')
-
-
-class PersonSerializer (serializers.ModelSerializer):
-        resume = ResumeSerializer(many = True, read_only = True)
-        class Meta: 
-            model = Person
-            fields = ('full_name', 'email', 'resume')
-
-
-
-class aResumeSerializer (serializers.Serializer):
+'''
+class ResumeSerializer (serializers.Serializer):
     person_email = PersonSerializer(many=True, read_only=True)
     title = serializers.CharField(required=True, allow_blank=False, max_length=32)
     summary = serializers.CharField(required=True, allow_blank=False, max_length=512)
     skills = serializers.CharField(required=True, allow_blank=False, max_length=512)
     related_courses = serializers.CharField(required=True, allow_blank=False, max_length=512)
+'''
+
 
 
 class EducationSerializer (serializers.Serializer):
@@ -61,3 +48,18 @@ class ProfessionalSerializer (serializers.Serializer):
     title_on_project = serializers.CharField(required=True, allow_blank=False, max_length=32)
     tech_used = serializers.CharField(required=True, allow_blank=False, max_length=32)
     summary = serializers.CharField(required=True, allow_blank=False, max_length=512)
+
+
+
+class ResumeSerializer (serializers.ModelSerializer):
+    class Meta:
+        model = Resume
+        fields = ['title','summary','skills','related_courses',]
+    
+
+
+class PersonSerializer (serializers.ModelSerializer):
+    resume = ResumeSerializer(many = True, read_only = True)
+    class Meta: 
+        model = Person
+        fields = ('full_name', 'email')
