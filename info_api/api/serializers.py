@@ -21,7 +21,11 @@ class EducationSerializer (serializers.Serializer):
     degree = serializers.CharField(required=True, allow_blank=False, max_length=32)
     time_at = serializers.CharField(required=True, allow_blank=False, max_length=32)
 
-
+class EducationHyperLinkedSerializer (serializers.ModelSerializer):
+    person_email = PersonSerializer(many=True, read_only=True)
+    institution_name = serializers.CharField(required=True, allow_blank=False, max_length=32)
+    degree = serializers.CharField(required=True, allow_blank=False, max_length=32)
+    time_at = serializers.CharField(required=True, allow_blank=False, max_length=32)
 
 
  
