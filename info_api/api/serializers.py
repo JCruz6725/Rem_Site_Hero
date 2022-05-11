@@ -5,14 +5,14 @@ from info_api.models import *
 class ResumeSerializer (serializers.ModelSerializer):
     class Meta:
         model = Resume
-        fields = ['title', 'summary', 'skills', 'related_courses']
+        fields = ('title', 'summary', 'skills', 'related_courses')
 
 
 class PersonSerializer (serializers.ModelSerializer):
         resume = ResumeSerializer(many = True, read_only = True)
         class Meta: 
             model = Person
-            fields = ['full_name', 'email', 'resume']
+            fields = ('full_name', 'email', 'resume')
 
             #full_name = serializers.CharField(required=True, allow_blank=False, max_length=32)
             #email = serializers.CharField(required=True, allow_blank=False, max_length=32)
