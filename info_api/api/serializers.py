@@ -15,7 +15,7 @@ class ResumeSerializer (serializers.Serializer):
 class ResumeSerializer (serializers.ModelSerializer):
     class Meta:
         model = Resume
-        fields = ['title','summary','skills','related_courses',]
+        fields = "__all__"
     
 
 
@@ -23,7 +23,7 @@ class PersonSerializer (serializers.ModelSerializer):
     resume = ResumeSerializer(many = True, read_only = True)
     class Meta: 
         model = Person
-        fields = ('full_name', 'email','resume')
+        fields = "__all__"
 
 class EducationSerializer (serializers.Serializer):
     person_email = PersonSerializer(many=True, read_only=True)

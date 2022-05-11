@@ -8,7 +8,7 @@ class Person (models.Model):
 
 
 class Resume (models.Model):
-    person_email = models.ForeignKey(Person, on_delete=models.CASCADE)
+    person_email = models.ForeignKey(Person, related_name='resume', on_delete=models.CASCADE)
     title = models.CharField(max_length=32)
     summary = models.CharField(max_length=512)
     skills = models.CharField(max_length=512)
