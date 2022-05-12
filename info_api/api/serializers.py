@@ -33,7 +33,7 @@ class PersonSerializer (serializers.ModelSerializer):
     resume = ResumeSerializer(many = True, read_only=True)
     education = EducationSerializer(many=True, read_only=True)
     project = ProjectSerializer(many=True, read_only=True)
-    professional = ProjectSerializer(many=True, read_only=True)
+    professional = ProfessionalSerializer(many=True, read_only=True)
 
     class Meta: 
         model = Person
