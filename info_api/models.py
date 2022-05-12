@@ -5,7 +5,7 @@ from django.db import models
 class Person (models.Model):
     full_name = models.CharField(max_length=64)
     email = models.CharField(max_length=64)
-    location = models.models.CharField(max_length=64)
+    location = modelsCharField(max_length=64)
 
 
 class Resume (models.Model):
@@ -31,7 +31,7 @@ class Project (models.Model):
     project_name = models.CharField(max_length=32)
     title_on_project = models.CharField(max_length=32)
     tech_used = models.CharField(max_length=32)
-    summary = models.CharField(max_length=512)
+    summary = models.CharField(max_length=1024)
  
  
 class Professional (models.Model):
@@ -42,4 +42,4 @@ class Professional (models.Model):
     time_at = models.CharField(max_length=32)
     title_of_project = models.CharField(max_length=32)
     tech_used = models.CharField(max_length=64)
-    summary = models.CharField(max_length=512)
+    summary = models.CharField(max_length=1024)
