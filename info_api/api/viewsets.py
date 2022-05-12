@@ -1,5 +1,5 @@
-from info_api.models import Person, Resume
-from  .serializers import PersonSerializer, ResumeSerializer
+from info_api.models import *
+from  .serializers import *
 from rest_framework import viewsets
 
 class PersonViewSet(viewsets.ReadOnlyModelViewSet):
