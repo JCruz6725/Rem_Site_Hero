@@ -14,4 +14,11 @@ class EducationViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = Education.objects.all()
     serializer_class = EducationSerializer
 
+class ProjectViewSet(viewsets.ReadOnlyModelViewSet):
+    queryset = Project.objects.all()
+    serializer_class = ProjectSerializer
+
+class ProfessionalViewSet(viewsets.ReadOnlyModelViewSet):
+    queryset = Professional.objects.all()
+    serializer_class = ProfessionalSerializer
 
