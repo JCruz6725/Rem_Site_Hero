@@ -5,7 +5,7 @@ from django.db import models
 class Person (models.Model):
     full_name = models.CharField(max_length=64)
     email = models.CharField(max_length=64)
-    location = modelsCharField(max_length=64)
+    location = models.CharField(max_length=64)
 
 
 class Resume (models.Model):
