@@ -29,13 +29,13 @@ DEBUG = True
 ALLOWED_HOSTS = ['evening-coast-33004.herokuapp.com']
 
 
-'''
+
 REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': [
         'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'
     ]
 }
-'''
+
 
 
 
@@ -53,17 +53,28 @@ INSTALLED_APPS = [
     'rest_framework',
     #'resume_project.info_api',
     'info_api.apps.InfoApiConfig',
+    'corsheaders',
 ]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
+
+
+#need to
+CORS_ALLOWED_ORIGINS = [
+"http://localhost:8080",
+"https://elegant-kelpie-09cfe4.netlify.app/",
+]
+
+
 
 ROOT_URLCONF = 'resume_project.urls'
 
