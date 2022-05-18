@@ -12,8 +12,12 @@ class Resume (models.Model):
     person_email = models.ForeignKey(Person, related_name='resume', on_delete=models.CASCADE)
     title = models.CharField(max_length=32)
     summary = models.CharField(max_length=1024)
-    skills = models.CharField(max_length=512)
-    related_courses = models.CharField(max_length=512)
+
+    programming_skills = models.CharField(max_length=1024)
+    industry_tools = models.CharField(max_length=1024)
+    office_tools = models.CharField(max_length=1024)
+
+    related_courses = models.CharField(max_length=1024)
 
 
 class Education (models.Model):
