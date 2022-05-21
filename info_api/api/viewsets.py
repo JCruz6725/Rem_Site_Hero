@@ -6,6 +6,7 @@ class PersonViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = Person.objects.all()
     serializer_class = PersonSerializer
 
+'''
 class ResumeViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = Resume.objects.all()
     serializer_class = ResumeSerializer
@@ -21,4 +22,4 @@ class ProjectViewSet(viewsets.ReadOnlyModelViewSet):
 class ProfessionalViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = Professional.objects.all()
     serializer_class = ProfessionalSerializer
-
+'''
