@@ -72,6 +72,9 @@ MIDDLEWARE = [
 CORS_ALLOWED_ORIGINS = [
 "http://localhost:8080",
 "https://elegant-kelpie-09cfe4.netlify.app",
+"https://www.johncruz.dev/",
+"https://johncruz.dev/",
+
 ]
 
 
