@@ -20,7 +20,7 @@ from .router import router
 
 urlpatterns = [
     #path('api/', include(router.urls)),
-    path('api/', include('person.urls')),
+    #path('api/', include('person.urls')),
     path('admin/', admin.site.urls),
     path('api-auth/', include('rest_framework.urls')),
 
