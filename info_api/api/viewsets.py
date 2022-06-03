@@ -7,11 +7,11 @@ from rest_framework.response import Response
 from django.contrib.auth.models import User
 
 
-
+'''
 class PersonViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = Person.objects.all()
     serializer_class = PersonSerializer
-
+'''
 
 
 
