@@ -5,7 +5,7 @@ from rest_framework.response import Response
 from info_api.models import Person
 from .serializers import PersonSerializer
 
-#@api_view(['GET', 'POST'])
+@api_view(['GET', 'POST'])
 @csrf_exempt
 def person_list(request):
     
