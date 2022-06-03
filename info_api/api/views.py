@@ -1,3 +1,6 @@
+
+from django.http import HttpResponse, JsonResponse
+
 from rest_framework import status
 from rest_framework.decorators import api_view
 from django.views.decorators.csrf import csrf_exempt
@@ -12,11 +15,12 @@ def person_list(request):
     if (request.method == 'GET'):
         person = Person.objects.all()
         serializer = PersonSerializer(person, many=True)
-        return Response(serializer.data)
+        return JsonResponse(serializer.data, safe=False)
 
     elif (request.method == 'POST'):
-        serializer = PersonSerializer(data=request.data)
+        data = JsonParser().parse(request)
+        serializer = PersonSerializer(data=data)
         if serializer.is_valid():
             serializer.save()
-            return Response(serializer.data, status=status.HTTP_201_CREATED)
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+            return JsonResponse(serializer.data, status=201)
+        return JsonResponse(serializer.errors, status=400)
