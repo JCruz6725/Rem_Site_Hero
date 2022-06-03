@@ -1,10 +1,12 @@
 from rest_framework import status
 from rest_framework.decorators import api_view
+from django.views.decorators.csrf import csrf_exempt
 from rest_framework.response import Response
 from info_api.models import Person
 from .serializers import PersonSerializer
 
-@api_view(['GET', 'POST'])
+#@api_view(['GET', 'POST'])
+@csrf_exempt
 def person_list(request):
     
     if (request.method == 'GET'):
