@@ -5,22 +5,25 @@ from rest_framework import status
 from rest_framework.decorators import api_view
 from django.views.decorators.csrf import csrf_exempt
 from rest_framework.response import Response
+
+
+
 from info_api.models import Person
 from .serializers import PersonSerializer
 
-@csrf_exempt
-#@api_view(['GET', 'POST'])
+#@csrf_exempt
+@api_view(['GET', 'POST'])
 def person_list(request):
     
     if (request.method == 'GET'):
         person = Person.objects.all()
         serializer = PersonSerializer(person, many=True)
-        return JsonResponse(serializer.data[0], safe=False)
+        return Response(serializer.data[0])
 
     elif (request.method == 'POST'):
-        data = JsonParser().parse(request)
-        serializer = PersonSerializer(data=data)
+        #data = JsonParser().parse(request)
+        serializer = PersonSerializer(data=request.data)
         if serializer.is_valid():
             serializer.save()
-            return JsonResponse(serializer.data, status=201)
-        return JsonResponse(serializer.errors, status=400)
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
