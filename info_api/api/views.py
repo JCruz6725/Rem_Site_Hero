@@ -15,7 +15,7 @@ def person_list(request):
     if (request.method == 'GET'):
         person = Person.objects.all()
         serializer = PersonSerializer(person, many=True)
-        return JsonResponse(serializer.data, safe=False)
+        return JsonResponse(serializer.data[0], safe=False)
 
     elif (request.method == 'POST'):
         data = JsonParser().parse(request)
