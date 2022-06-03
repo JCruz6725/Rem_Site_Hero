@@ -10,7 +10,7 @@ from .serializers import PersonSerializer
 def person_list(request):
     
     if (request.method == 'GET'):
-        person = Person.objests.all()
+        person = Person.objects.all()
         serializer = PersonSerializer(person, many=True)
         return Response(serializer.data)
 
