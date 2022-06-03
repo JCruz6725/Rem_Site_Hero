@@ -1,10 +1,19 @@
 from info_api.models import *
 from  .serializers import *
-from rest_framework import viewsets
+from rest_framework import viewsets, authentication, permissions
+
+from rest_framework.views import APIView
+from rest_framework.response import Response
+from django.contrib.auth.models import User
+
+
 
 class PersonViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = Person.objects.all()
     serializer_class = PersonSerializer
+
+
+
 
 '''
 class ResumeViewSet(viewsets.ReadOnlyModelViewSet):
