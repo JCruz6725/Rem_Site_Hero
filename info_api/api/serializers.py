@@ -12,21 +12,21 @@ class ResumeSerializer (serializers.ModelSerializer):
 
 
 class EducationSerializer (serializers.ModelSerializer):
-    #user_email = serializers.CharField(source=("user.email"))
+    user_email = serializers.CharField(source=("user_email.email"))
     class Meta:
         model = Education
         fields = "__all__"
 
 
 class ProjectSerializer (serializers.ModelSerializer):
-    #user_email = serializers.CharField(source=("user.email"))
+    user_email = serializers.CharField(source=("user_email.email"))
     class Meta:
         model = Project
         fields = "__all__"
 
 
 class ProfessionalSerializer (serializers.ModelSerializer):
-    #user_email = serializers.CharField(source=("user.email"))
+    user_email = serializers.CharField(source=("user_email.email"))
     class Meta:
         model = Professional
         fields = "__all__"
