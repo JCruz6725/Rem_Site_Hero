@@ -24,6 +24,6 @@ class PersonList(APIView):
         serializer = PersonSerializer(person, many=True)
         return Response(serializer.data[1])
 
-class ProjectList(APIView):
+#class ProjectList(APIView):
 
 
