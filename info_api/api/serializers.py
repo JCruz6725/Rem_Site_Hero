@@ -35,7 +35,7 @@ class PersonSerializer (serializers.ModelSerializer):
 
 
 class UserSerializer (serializers.ModelSerializer):
-    person = PersonSerializer(many=False, read_only=True)
+    person = PersonSerializer(many=True, read_only=True)
     resume = ResumeSerializer(many=True, read_only=True)
     education = EducationSerializer(many=True, read_only=True)
     project = ProjectSerializer(many=True, read_only=True)
