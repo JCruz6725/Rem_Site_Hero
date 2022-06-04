@@ -25,7 +25,7 @@ class UserList(APIView):
         return Response(serializer.data[0])
 
 
-class ProjectList(APIview):
+class ProjectList(APIView):
     # Need to fix the permission later 
     permission_classes = [AllowAny]
     def post(self, request, format=None):
