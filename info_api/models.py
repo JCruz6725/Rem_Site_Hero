@@ -1,11 +1,14 @@
 from django.db import models
+from django.contrib.auth.models import User
 
 #refer to DB ralation diagram for full explination
 
 class Person (models.Model):
-    full_name = models.CharField(max_length=64)
-    email = models.CharField(max_length=64)
+    user = model.ForeignKey(User, on_delete=models.CASCADE)
+    #full_name = models.CharField(max_length=64)
+    #email = models.CharField(max_length=64)
     location = models.CharField(max_length=64)
+
 
 
 class Resume (models.Model):

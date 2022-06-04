@@ -22,7 +22,7 @@ class PersonList(APIView):
 
         person = Person.objects.all()
         serializer = PersonSerializer(person, many=True)
-        return Response(serializer.data[1])
+        return Response(serializer.data[0])
 
 #class ProjectList(APIView):
 
