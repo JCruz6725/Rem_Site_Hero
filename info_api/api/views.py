@@ -12,7 +12,7 @@ from rest_framework.permissions import AllowAny
 
 from info_api.models import Person
 from django.contrib.auth.models import User
-from .serializers import PersonSerializer
+from .serializers import PersonSerializer, UserSerializer
 
 
 class UserList(APIView):
