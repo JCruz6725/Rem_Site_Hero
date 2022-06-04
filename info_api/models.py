@@ -4,7 +4,7 @@ from django.contrib.auth.models import User
 #refer to DB ralation diagram for full explination
 
 class Person (models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, related_name='user',on_delete=models.CASCADE)
     #full_name = models.CharField(max_length=64)
     #email = models.CharField(max_length=64)
     location = models.CharField(max_length=64)
@@ -12,7 +12,7 @@ class Person (models.Model):
 
 
 class Resume (models.Model):
-    person_email = models.ForeignKey(Person, related_name='resume', on_delete=models.CASCADE)
+    user_email = models.ForeignKey(User, related_name='resume', on_delete=models.CASCADE)
     title = models.CharField(max_length=32)
     summary = models.CharField(max_length=1024)
     programming_skills = models.CharField(max_length=1024)
@@ -22,7 +22,7 @@ class Resume (models.Model):
 
 
 class Education (models.Model):
-    person_email = models.ForeignKey(Person, related_name='education', on_delete=models.CASCADE)
+    user_email = models.ForeignKey(User, related_name='education', on_delete=models.CASCADE)
     institution_name = models.CharField(max_length=64)
     location = models.CharField(max_length=64)
     degree = models.CharField(max_length=128)
@@ -30,7 +30,7 @@ class Education (models.Model):
  
  
 class Project (models.Model):
-    person_email = models.ForeignKey(Person, related_name='project', on_delete=models.CASCADE)
+    user_email = models.ForeignKey(User, related_name='project', on_delete=models.CASCADE)
     project_name = models.CharField(max_length=32)
     title_on_project = models.CharField(max_length=32)
     tech_used = models.CharField(max_length=32)
@@ -38,7 +38,7 @@ class Project (models.Model):
  
  
 class Professional (models.Model):
-    person_email = models.ForeignKey(Person, related_name='professional', on_delete=models.CASCADE)
+    user_email = models.ForeignKey(User, related_name='professional', on_delete=models.CASCADE)
     employer_name = models.CharField(max_length=32)
     position = models.CharField(max_length=32)
     time_at = models.CharField(max_length=32)

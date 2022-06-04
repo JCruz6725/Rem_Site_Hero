@@ -29,16 +29,25 @@ class ProfessionalSerializer (serializers.ModelSerializer):
 
 
 
-class PersonSerializer (serializers.ModelSerializer):
-    resume = ResumeSerializer(many = True, read_only=True)
-    education = EducationSerializer(many=True, read_only=True)
-    project = ProjectSerializer(many=True, read_only=True)
-    professional = ProfessionalSerializer(many=True, read_only=True)
 
+
+
+class PersonSerializer (serializers.ModelSerializer):
     class Meta: 
         model = Person
         fields = "__all__"
 
+
+class UserSerializer (serializers.ModelSerializer):
+    person = PersonSerializer(many=False, read_only=True)
+    resume = ResumeSerializer(many=True, read_only=True)
+    education = EducationSerializer(many=True, read_only=True)
+    project = ProjectSerializer(many=True, read_only=True)
+    professional = ProfessionalSerializer(many=True, read_only=True)
+
+    class Meta:
+        model = User
+        fields = "__all__"
 
 
  
