@@ -14,7 +14,7 @@ from info_api.models import Person
 from .serializers import PersonSerializer
 
 
-class person_v(APIView):
+class PersonList(APIView):
     permission_classes = [AllowAny]
     #permission_classes = [IsAuthenticated]
 
@@ -22,5 +22,8 @@ class person_v(APIView):
 
         person = Person.objects.all()
         serializer = PersonSerializer(person, many=True)
-        return Response(serializer.data[0])
+        return Response(serializer.data[1])
+
+class ProjectList(APIView):
+
 
