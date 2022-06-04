@@ -15,11 +15,11 @@ from .serializers import PersonSerializer
 
 @csrf_exempt
 @api_view(['GET', 'POST'])
-class person_list(APIView):
+class person_v(APIView):
     permission_classes = [AllowAny]
     #permission_classes = [IsAuthenticated]
 
-    def person_list(request):
+    def person_list(self, request):
 
         if (request.method == 'GET'):
             person = Person.objects.all()
