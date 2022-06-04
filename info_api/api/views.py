@@ -20,10 +20,21 @@ class UserList(APIView):
     #permission_classes = [IsAuthenticated]
 
     def get(self, request, format=None):
-
         user = User.objects.all()
         serializer = UserSerializer(user, many=True)
         return Response(serializer.data[0])
+
+
+class ProjectList(APIview):
+    # Need to fix the permission later 
+    permission_classes = [AllowAny]
+    def post(self, request, format=None):
+        serializer = ProjectSerializer(data=request.data)
+        if (serializer.is_valid()):
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
 
 #class ProjectList(APIView):
 

@@ -29,6 +29,7 @@ class ProfessionalSerializer (serializers.ModelSerializer):
 
 
 class PersonSerializer (serializers.ModelSerializer):
+    user = serializers.charField(source=("user.email"))
     class Meta: 
         model = Person
         fields = "__all__"
