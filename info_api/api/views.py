@@ -3,6 +3,7 @@ from django.http import HttpResponse, JsonResponse
 
 from rest_framework import status
 from rest_framework.decorators import api_view
+from rest_framework.views import APIView
 from django.views.decorators.csrf import csrf_exempt
 from rest_framework.response import Response
 
@@ -13,8 +14,11 @@ from .serializers import PersonSerializer
 
 @csrf_exempt
 @api_view(['GET', 'POST'])
-def person_list(request):
-    
+class person_v(APIView):
+    permission_classes = [AllowAny]
+
+    def person_list(request):
+
     if (request.method == 'GET'):
         person = Person.objects.all()
         serializer = PersonSerializer(person, many=True)
