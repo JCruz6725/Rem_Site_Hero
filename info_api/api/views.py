@@ -10,9 +10,9 @@ from rest_framework.permissions import AllowAny
 
 
 
-from info_api.models import Person
+from info_api.models import Person, Project
 from django.contrib.auth.models import User
-from .serializers import PersonSerializer, UserSerializer
+from .serializers import PersonSerializer, UserSerializer, ProjectSerializer
 
 
 class UserList(APIView):
@@ -28,6 +28,12 @@ class UserList(APIView):
 class ProjectList(APIView):
     # Need to fix the permission later 
     permission_classes = [AllowAny]
+
+    def get(self, request, format=None):
+        project = Project.objects.all()
+        serializer = ProjectSerializer(project, many=True)
+        return Response(serializer.data)
+
     def post(self, request, format=None):
         serializer = ProjectSerializer(data=request.data)
         if (serializer.is_valid()):
