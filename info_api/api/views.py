@@ -13,8 +13,7 @@ from rest_framework.permissions import AllowAny
 from info_api.models import Person
 from .serializers import PersonSerializer
 
-@csrf_exempt
-@api_view(['GET', 'POST'])
+
 class person_v(APIView):
     permission_classes = [AllowAny]
     #permission_classes = [IsAuthenticated]
