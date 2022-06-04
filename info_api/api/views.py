@@ -16,6 +16,7 @@ from .serializers import PersonSerializer
 @api_view(['GET', 'POST'])
 class person_v(APIView):
     permission_classes = [AllowAny]
+    #permission_classes = [IsAuthenticated]
 
     def person_list(request):
 
