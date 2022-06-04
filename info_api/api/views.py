@@ -19,15 +19,15 @@ class person_v(APIView):
 
     def person_list(request):
 
-    if (request.method == 'GET'):
-        person = Person.objects.all()
-        serializer = PersonSerializer(person, many=True)
-        return Response(serializer.data[0])
+        if (request.method == 'GET'):
+            person = Person.objects.all()
+            serializer = PersonSerializer(person, many=True)
+            return Response(serializer.data[0])
 
-    elif (request.method == 'POST'):
-        #data = JsonParser().parse(request)
-        serializer = PersonSerializer(data=request.data)
-        if serializer.is_valid():
-            serializer.save()
-            return Response(serializer.data, status=status.HTTP_201_CREATED)
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+        elif (request.method == 'POST'):
+            #data = JsonParser().parse(request)
+            serializer = PersonSerializer(data=request.data)
+            if serializer.is_valid():
+                serializer.save()
+                return Response(serializer.data, status=status.HTTP_201_CREATED)
+            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
