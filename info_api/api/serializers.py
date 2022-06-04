@@ -12,7 +12,7 @@ class ResumeSerializer (serializers.ModelSerializer):
 
 
 class EducationSerializer (serializers.ModelSerializer):
-    user_email = serializers.CharField(source=("user.email"))
+    #user_email = serializers.CharField(source=("user.email"))
     class Meta:
         model = Education
         fields = "__all__"
