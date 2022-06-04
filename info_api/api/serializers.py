@@ -5,7 +5,7 @@ from info_api.models import *
 
 
 class ResumeSerializer (serializers.ModelSerializer):
-    user_email = serializers.CharField(source=("user.email"))
+    user = serializers.CharField(source=("user.email"))
     class Meta:
         model = Resume
         fields = "__all__"
