@@ -15,7 +15,7 @@ from .serializers import PersonSerializer
 
 @csrf_exempt
 @api_view(['GET', 'POST'])
-class person_v(APIView):
+class person_list(APIView):
     permission_classes = [AllowAny]
     #permission_classes = [IsAuthenticated]
 
