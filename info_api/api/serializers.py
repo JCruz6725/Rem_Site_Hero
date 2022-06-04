@@ -5,7 +5,7 @@ from info_api.models import *
 
 
 class ResumeSerializer (serializers.ModelSerializer):
-    user = serializers.CharField(source=("user.email"))
+    user_email = serializers.CharField(source=("user_email.email"))
     class Meta:
         model = Resume
         fields = "__all__"
@@ -19,14 +19,14 @@ class EducationSerializer (serializers.ModelSerializer):
 
 
 class ProjectSerializer (serializers.ModelSerializer):
-    user_email = serializers.CharField(source=("user.email"))
+    #user_email = serializers.CharField(source=("user.email"))
     class Meta:
         model = Project
         fields = "__all__"
 
 
 class ProfessionalSerializer (serializers.ModelSerializer):
-    user_email = serializers.CharField(source=("user.email"))
+    #user_email = serializers.CharField(source=("user.email"))
     class Meta:
         model = Professional
         fields = "__all__"
