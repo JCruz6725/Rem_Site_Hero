@@ -40,7 +40,7 @@ class ProjectList(APIView):
         user = User.objects.get(email=request.data.get('user_email'))
         serializer.user_email = user
         if (serializer.is_valid()):
-            serializer.save()
+            #serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
