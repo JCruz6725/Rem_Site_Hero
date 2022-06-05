@@ -19,7 +19,7 @@ class EducationSerializer (serializers.ModelSerializer):
 
 
 class ProjectSerializer (serializers.ModelSerializer):
-    user_email = serializers.CharField(source=("user_email.email"), read_only=True)
+    user_email = serializers.CharField(source=("user_email.email"), read_only=False)
 
 
 
