@@ -27,16 +27,16 @@ class Education (models.Model):
     location = models.CharField(max_length=64)
     degree = models.CharField(max_length=128)
     time_at = models.CharField(max_length=32)
- 
- 
+
+
 class Project (models.Model):
     user_email = models.ForeignKey(User, related_name='project', on_delete=models.CASCADE)
     project_name = models.CharField(max_length=32)
     title_on_project = models.CharField(max_length=32)
     tech_used = models.CharField(max_length=32)
     summary = models.CharField(max_length=1024)
- 
- 
+
+
 class Professional (models.Model):
     user_email = models.ForeignKey(User, related_name='professional', on_delete=models.CASCADE)
     employer_name = models.CharField(max_length=32)
