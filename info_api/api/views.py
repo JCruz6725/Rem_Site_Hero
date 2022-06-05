@@ -36,8 +36,8 @@ class ProjectList(APIView):
 
     def post(self, request, format=None):
         serializer = ProjectSerializer(data=request.data)
-        a = User()
-        user = a.objects.get(email=request.data['user_email'])
+        
+        user = User.objects.get(email=request.POST['user_email'])
         serializer.user_email = user
         if (serializer.is_valid()):
             serializer.save()
