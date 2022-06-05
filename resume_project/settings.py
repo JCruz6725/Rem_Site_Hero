@@ -29,7 +29,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 DEBUG = True
 
 
-ALLOWED_HOSTS = ['evening-coast-33004.herokuapp.com']
+ALLOWED_HOSTS = ['evening-coast-33004.herokuapp.com', 'johndjangodev.herokuapp.com']
 
 
 

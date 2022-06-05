@@ -19,7 +19,11 @@ class EducationSerializer (serializers.ModelSerializer):
 
 
 class ProjectSerializer (serializers.ModelSerializer):
-    user_email = serializers.CharField(source=("user_email.email"))
+    user_email = serializers.CharField(source=("user_email.email"), read_only=True)
+
+
+    def create(self):
+
     class Meta:
         model = Project
         fields = "__all__"
