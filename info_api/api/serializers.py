@@ -27,8 +27,15 @@ class ProjectSerializer (serializers.ModelSerializer):
         model = Project
         fields = "__all__"
 
-    def create (self, validated_data):
-        return Project.objects.create(**validated_data)
+    def create(self, validated_data):
+        # documentId = validated_data.pop("documentId")
+        # print(validated_data)
+        project = Project.objects.create(
+            email=User.objects.get(id="1"), **validated_data
+        )
+        project.save()
+        return project
+
 
 
 class ProfessionalSerializer (serializers.ModelSerializer):
@@ -43,6 +50,8 @@ class PersonSerializer (serializers.ModelSerializer):
     class Meta: 
         model = Person
         fields = "__all__"
+
+    
 
 
 class UserSerializer (serializers.ModelSerializer):
