@@ -1,5 +1,6 @@
 from rest_framework import serializers 
 from info_api.models import *
+from django.contrib.auth.models import User
 
 
 
@@ -70,7 +71,7 @@ class PersonSerializer (serializers.ModelSerializer):
         model = Person
         fields = "__all__"
 
-    
+
 
 class UserSerializer (serializers.ModelSerializer):
     class Meta:
