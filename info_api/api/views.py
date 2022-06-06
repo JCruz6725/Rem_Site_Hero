@@ -30,6 +30,8 @@ class UserDetail(APIView):
     #permission_classes = [IsAuthenticated]
 
     def get(self, id, request, format=None):
+
+
         user = User.objects.get(id=id)
         serializer = UserSerializer(user)
         return Response(serializer.data)
@@ -58,6 +60,7 @@ class ProjectList(APIView):
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
-#class ProjectList(APIView):
+class ProjectDetail(APIView):
+    pass
 
 

@@ -4,8 +4,9 @@ from .api import views
 
 urlpatterns = [
     path('user/', views.UserList.as_view()),
-    path('user/<int:id>/', views.UserList.as_view()),
-    path('project/', views.ProjectList.as_view())
+    path('user/<int:id>/', views.UserDetail.as_view()),
+    path('project/', views.ProjectList.as_view()),
+    path('project/<int:id>', views.ProjectDetail.as_view())
     #path('person/<int:pk>', views.snippet_detail),
 ]
 
