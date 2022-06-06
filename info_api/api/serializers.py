@@ -1,6 +1,6 @@
 from rest_framework import serializers 
 from info_api.models import *
-from django.contrib.auth.models import User
+#from django.contrib.auth.models import User
 
 
 
@@ -21,9 +21,6 @@ class EducationSerializer (serializers.ModelSerializer):
 
 class ProjectSerializer (serializers.ModelSerializer):
     user_email = serializers.CharField(source=("user_email.email"), read_only=False)
-
-
-
     class Meta:
         model = Project
         fields = "__all__"
@@ -31,9 +28,6 @@ class ProjectSerializer (serializers.ModelSerializer):
     def create (self, validated_data):
         user = User.object.get
         p = Project.objects.create
-
-
-
         return Project(**validated_data)
 
     def update(self, instance, validated_data):
@@ -42,7 +36,6 @@ class ProjectSerializer (serializers.ModelSerializer):
         instance.title_on_project = validated_data.get('title_on_project', instance.title_on_project)
         instance.tech_used = validated_data.get('tech_used', instance.tech_used)
         instance.summary = validated_data.get('summary', instance.summary)
-
         return instance
 
 
