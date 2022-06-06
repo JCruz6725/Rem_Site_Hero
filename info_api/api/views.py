@@ -38,6 +38,8 @@ class ProjectList(APIView):
         serializer = ProjectSerializer(data=request.data)
         
         user = User.objects.get(email=request.data.get('user_email'))
+        serializer = UserSerializer(user, many=True)
+        return Response(serializer.data)
         serializer.user_email = user
         if (serializer.is_valid()):
             serializer.create()
