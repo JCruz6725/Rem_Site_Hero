@@ -31,7 +31,7 @@ class ProjectSerializer (serializers.ModelSerializer):
         return Project(**validated_data)
 
     def update(self, instance, validated_data):
-        instance.email = validated_data.get('email', 'john.cruz6725@gmail.com')
+        #instance.email = validated_data.get('email', 'john.cruz6725@gmail.com')
         instance.project_name = validated_data.get('project_name', instance.project_name)
         instance.title_on_project = validated_data.get('title_on_project', instance.title_on_project)
         instance.tech_used = validated_data.get('tech_used', instance.tech_used)
@@ -42,7 +42,7 @@ class ProjectSerializer (serializers.ModelSerializer):
 
     '''
     def create(self, validated_data):
-        # documentId = validated_data.pop("documentId")
+        # user_email = validated_data.pop("user_email")
         # print(validated_data)
         project = Project.objects.create(
             email=User.objects.get(id="1"), **validated_data

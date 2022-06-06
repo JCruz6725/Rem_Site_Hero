@@ -37,12 +37,13 @@ class ProjectList(APIView):
     def post(self, request, format=None):
         serializer = ProjectSerializer(data=request.data)
         
-        user = request.data['user_email']
+        #user = request.data['user_email']
         #serializer = UserSerializer(user, many=False)
         #return Response(serializer.data)
         #serializer.data[] = user.email
         if (serializer.is_valid()):
-            serializer.save()
+            newPro = serializer.create(serializer.data)
+            serializer.updata(newPro, serializer.data)
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
