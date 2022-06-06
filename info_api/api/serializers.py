@@ -28,6 +28,11 @@ class ProjectSerializer (serializers.ModelSerializer):
         fields = "__all__"
     
     def create (self, validated_data):
+        user = User.object.get
+        p = Project.objects.create
+
+
+
         return Project(**validated_data)
 
     def update(self, instance, validated_data):
@@ -67,7 +72,13 @@ class PersonSerializer (serializers.ModelSerializer):
 
     
 
+class UserSerializer (serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = "__all__"
 
+
+'''
 class UserSerializer (serializers.ModelSerializer):
     person = PersonSerializer(many=True, read_only=True)
     resume = ResumeSerializer(many=True, read_only=True)
@@ -78,7 +89,7 @@ class UserSerializer (serializers.ModelSerializer):
     class Meta:
         model = User
         fields = ['username', 'first_name', 'last_name', 'email', 'education', 'resume', 'project', 'professional', 'person']
-
+'''
 
  
  
