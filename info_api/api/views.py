@@ -22,7 +22,17 @@ class UserList(APIView):
     def get(self, request, format=None):
         user = User.objects.all()
         serializer = UserSerializer(user, many=True)
-        return Response(serializer.data[0])
+        return Response(serializer.data)
+
+
+class UserDetail(APIView):
+    permission_classes = [AllowAny]
+    #permission_classes = [IsAuthenticated]
+
+    def get(self, email, request, format=None):
+        user = User.objects.get(email=email)
+        serializer = UserSerializer(user, many=True)
+        return Response(serializer.data)
 
 
 class ProjectList(APIView):
