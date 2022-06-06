@@ -30,7 +30,7 @@ class UserDetail(APIView):
     #permission_classes = [IsAuthenticated]
 
     def get(self, id, request, format=None):
-        user = User.objects.get(id=id)
+        user = User.objects.get(pk=id)
         serializer = UserSerializer(user)
         return Response(serializer.data)
 
