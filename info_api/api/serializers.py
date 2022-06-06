@@ -26,7 +26,7 @@ class ProjectSerializer (serializers.ModelSerializer):
     class Meta:
         model = Project
         fields = "__all__"
-
+    '''
     def create(self, validated_data):
         # documentId = validated_data.pop("documentId")
         # print(validated_data)
@@ -35,7 +35,7 @@ class ProjectSerializer (serializers.ModelSerializer):
         )
         project.save()
         return project
-
+    '''
 
 
 class ProfessionalSerializer (serializers.ModelSerializer):
