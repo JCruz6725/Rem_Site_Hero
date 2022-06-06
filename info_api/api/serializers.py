@@ -1,6 +1,6 @@
 from rest_framework import serializers 
-from info_api.models import *
-#from django.contrib.auth.models import User
+from info_api.models import Resume, Education, Project, Professional, Person
+from django.contrib.auth.models import User
 
 
 
