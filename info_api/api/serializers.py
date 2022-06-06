@@ -26,6 +26,20 @@ class ProjectSerializer (serializers.ModelSerializer):
     class Meta:
         model = Project
         fields = "__all__"
+    
+    def create (self, validated_data):
+        return Project(**validated_data)
+
+    def update(self, instance, validated_data):
+        instance.email = validated_data.get('email', 'john.cruz6725@gmail.com')
+        instance.project_name = validated_data.get('project_name', instance.project_name)
+        instance.title_on_project = validated_data.get('title_on_project', instance.title_on_project)
+        instance.tech_used = validated_data.get('tech_used', instance.tech_used)
+        instance.summary = validated_data.get('summary', instance.summary)
+
+        return instance
+
+
     '''
     def create(self, validated_data):
         # documentId = validated_data.pop("documentId")
