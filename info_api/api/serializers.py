@@ -58,7 +58,7 @@ class ProfessionalSerializer (serializers.ModelSerializer):
         fields = "__all__"
 
 
-class UserSerializer (serializers.ModelSerializer):
+class UserSerial (serializers.ModelSerializer):
     a = 0
     #class Meta:
         #model = User
