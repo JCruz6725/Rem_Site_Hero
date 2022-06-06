@@ -31,10 +31,10 @@ class Education (models.Model):
 
 class Project (models.Model):
     user_email = models.ForeignKey(User, related_name='project', on_delete=models.CASCADE)
-    project_name = models.CharField(max_length=32, defualt='')
-    title_on_project = models.CharField(max_length=32, defualt='')
-    tech_used = models.CharField(max_length=32, defualt='')
-    summary = models.CharField(max_length=1024, defualt='')
+    project_name = models.CharField(max_length=32, default='')
+    title_on_project = models.CharField(max_length=32, default='')
+    tech_used = models.CharField(max_length=32, default='')
+    summary = models.CharField(max_length=1024, default='')
 
 
 class Professional (models.Model):
