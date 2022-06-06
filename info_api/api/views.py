@@ -29,10 +29,16 @@ class UserDetail(APIView):
     permission_classes = [AllowAny]
     #permission_classes = [IsAuthenticated]
 
-    def get(self, id, request, format=None):
+    def get_object(self, id):
+        try:
+            return User.objects.get(id=id)
+        except User.DoesNotExist:
+            raise Http404
 
 
-        user = User.objects.get(id=id)
+
+    def get(self, request, id, format=None):
+        user = self.get_object(id)
         serializer = UserSerializer(user)
         return Response(serializer.data)
 
