@@ -10,9 +10,9 @@ from rest_framework.permissions import AllowAny
 
 
 
-from info_api.models import *
-#from django.contrib.auth.models import User
-from .serializers import *
+from info_api.models import Resume, Education, Project, Professional, Person
+from django.contrib.auth.models import User
+from .serializers import UserSerializer, ProjectSerializer
 
 
 class UserList(APIView):
