@@ -29,8 +29,8 @@ class UserDetail(APIView):
     permission_classes = [AllowAny]
     #permission_classes = [IsAuthenticated]
 
-    def get(self, id, request, format=None):
-        user = User.objects.get(pk=id)
+    def get(self, email, request, format=None):
+        user = User.objects.get(email=email)
         serializer = UserSerializer(user)
         return Response(serializer.data)
 
