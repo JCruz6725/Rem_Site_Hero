@@ -58,36 +58,14 @@ class ProfessionalSerializer (serializers.ModelSerializer):
         fields = "__all__"
 
 
+class UserSerializer (serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = "__all__"
+
+
 class PersonSerializer (serializers.ModelSerializer):
     user = serializers.CharField(source=("user.email"))
     class Meta: 
         model = Person
         fields = "__all__"
-
-
-
-class UserSerializer (serializers.ModelSerializer):
-    class Meta:
-        model = User
-        fields = "__all__"
-
-
-'''
-class UserSerializer (serializers.ModelSerializer):
-    person = PersonSerializer(many=True, read_only=True)
-    resume = ResumeSerializer(many=True, read_only=True)
-    education = EducationSerializer(many=True, read_only=True)
-    project = ProjectSerializer(many=True, read_only=True)
-    professional = ProfessionalSerializer(many=True, read_only=True)
-
-    class Meta:
-        model = User
-        fields = ['username', 'first_name', 'last_name', 'email', 'education', 'resume', 'project', 'professional', 'person']
-'''
-
- 
- 
-
-
-
-
