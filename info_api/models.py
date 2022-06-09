@@ -9,6 +9,10 @@ class Person (models.Model):
     #email = models.CharField(max_length=64)
     location = models.CharField(max_length=64)
 
+    def __str__(self):
+        return self.user
+    
+
 
 
 class Resume (models.Model):
@@ -19,6 +23,10 @@ class Resume (models.Model):
     industry_tools = models.CharField(max_length=1024)
     office_tools = models.CharField(max_length=1024)
     related_courses = models.CharField(max_length=1024)
+    
+    def __str__(self):
+        return self.title
+    
 
 
 class Education (models.Model):
@@ -28,6 +36,10 @@ class Education (models.Model):
     degree = models.CharField(max_length=128)
     time_at = models.CharField(max_length=32)
 
+    def __str__(self):
+        return self.institution_name
+    
+
 
 class Project (models.Model):
     user_email = models.ForeignKey(User, related_name='project', on_delete=models.CASCADE)
@@ -35,6 +47,10 @@ class Project (models.Model):
     title_on_project = models.CharField(max_length=32, default='')
     tech_used = models.CharField(max_length=32, default='')
     summary = models.CharField(max_length=1024, default='')
+
+    def __str__(self):
+        return self.project_name
+    
 
 
 class Professional (models.Model):
@@ -45,3 +61,7 @@ class Professional (models.Model):
     title_of_project = models.CharField(max_length=32)
     tech_used = models.CharField(max_length=64)
     summary = models.CharField(max_length=1024)
+
+    def __str__(self):
+        return self.title_of_project
+    

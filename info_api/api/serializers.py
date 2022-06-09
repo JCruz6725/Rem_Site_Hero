@@ -26,9 +26,9 @@ class ProjectSerializer (serializers.ModelSerializer):
         fields = "__all__"
     
     def create (self, validated_data):
-        user = User.object.get
-        p = Project.objects.create
-        return Project(**validated_data)
+        user = User.object.get(id=1)
+        p = Project.objects.create(user_email=user['id'])
+        return p(**validated_data)
 
     def update(self, instance, validated_data):
         #instance.email = validated_data.get('email', 'john.cruz6725@gmail.com')
