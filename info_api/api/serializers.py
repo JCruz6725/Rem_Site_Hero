@@ -1,10 +1,20 @@
 from rest_framework import serializers 
-from info_api.models import Resume, Education, Project, Professional, Person
-from django.contrib.auth.models import User
+
+from django.conf import settings as s
+
+from django.contrib.auth import get_user_model
+Account = get_user_model()
+
+#from info_api.models import Resume, Education, Project, Professional, Person
+#from django.contrib.auth.models import User
 
 
+class AccountSerializer (serializers.ModelSerializer):
+    class Meta:
+        model = Account
+        fields = "__all__"
 
-
+'''
 class ResumeSerializer (serializers.ModelSerializer):
     user_email = serializers.CharField(source=("user_email.email"))
     class Meta:
@@ -39,7 +49,6 @@ class ProjectSerializer (serializers.ModelSerializer):
         return instance
 
 
-    '''
     def create(self, validated_data):
         # user_email = validated_data.pop("user_email")
         # print(validated_data)
@@ -48,7 +57,6 @@ class ProjectSerializer (serializers.ModelSerializer):
         )
         project.save()
         return project
-    '''
 
 
 class ProfessionalSerializer (serializers.ModelSerializer):
@@ -69,3 +77,5 @@ class PersonSerializer (serializers.ModelSerializer):
     class Meta: 
         model = Person
         fields = "__all__"
+
+'''

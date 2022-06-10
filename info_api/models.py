@@ -1,5 +1,6 @@
 from django.db import models
-from django.contrib.auth.models import User, AbstractUser, BaseUserManager
+from django.conf import settings 
+from django.contrib.auth.models import User, AbstractBaseUser, BaseUserManager
 
 #refer to DB ralation diagram for full explination
 
@@ -11,13 +12,13 @@ class AccountManager (BaseUserManager):
         if not username:
             raise ValueError ("username is required")
 
-        new_account = self.model(email=self.normalized_email(email), username=username)
+        new_account = self.model(email=self.normalize_email(email), username=username)
         new_account.set_password(password)
         new_account.save(using=self._db)
         return new_account
 
     def create_superuser(self, email, username, password=None):
-        new_account = self.create_user(email, username=user, password=password)
+        new_account = self.create_user(email, username=username, password=password)
 
         new_account.is_admin = True
         new_account.is_superuser =True
@@ -30,10 +31,12 @@ class AccountManager (BaseUserManager):
 class Account (AbstractBaseUser):
     email = models.EmailField(max_length=255, unique=True)
     username = models.CharField(max_length=63, unique=True)
-
+    location = models.CharField(max_length=63, blank=True)
+    
     is_staff = models.BooleanField(default=False)
     is_active = models.BooleanField(default=True)
     is_superuser = models.BooleanField(default=False)
+    is_admin = models.BooleanField(default=False)
 
     last_login = models.DateTimeField(auto_now=True)
     date_joined = models.DateTimeField(auto_now_add=True)
@@ -42,7 +45,7 @@ class Account (AbstractBaseUser):
     REQUIRED_FIELDS = ['username']
 
     objects = AccountManager()
-    
+
     def __str__(self):
         return self.email
     
@@ -53,20 +56,8 @@ class Account (AbstractBaseUser):
         return True
 
 
-class Person (models.Model):
-    user = models.ForeignKey(User, related_name='person',on_delete=models.CASCADE)
-    #full_name = models.CharField(max_length=64)
-    #email = models.CharField(max_length=64)
-    location = models.CharField(max_length=64)
-
-    def __str__(self):
-        return self.user
-    
-
-
-
 class Resume (models.Model):
-    user_email = models.ForeignKey(User, related_name='resume', on_delete=models.CASCADE)
+    account_email = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='resume', on_delete=models.CASCADE)
     title = models.CharField(max_length=32)
     summary = models.CharField(max_length=1024)
     programming_skills = models.CharField(max_length=1024)
@@ -77,7 +68,7 @@ class Resume (models.Model):
     def __str__(self):
         return self.title
     
-
+'''
 
 class Education (models.Model):
     user_email = models.ForeignKey(User, related_name='education', on_delete=models.CASCADE)
@@ -115,3 +106,4 @@ class Professional (models.Model):
     def __str__(self):
         return self.title_of_project
     
+'''

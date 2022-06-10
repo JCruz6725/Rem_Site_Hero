@@ -10,39 +10,49 @@ from rest_framework.permissions import AllowAny
 
 
 
-from info_api.models import Resume, Education, Project, Professional, Person
-from django.contrib.auth.models import User
-from .serializers import UserSerializer, ProjectSerializer
+#from info_api.models import Resume, Education, Project, Professional, Person
+#from django.contrib.auth.models import User
+#from .serializers import UserSerializer, ProjectSerializer
+from .serializers import AccountSerializer
+
+from django.conf import settings #for *settings.AUTH_USER_MODEL*
 
 
-class UserList(APIView):
+from django.contrib.auth import get_user_model
+
+
+Account = get_user_model()
+
+
+class AccountList(APIView):
     permission_classes = [AllowAny]
     #permission_classes = [IsAuthenticated]
 
     def get(self, request, format=None):
-        user = User.objects.all()
-        serializer = UserSerializer(user, many=True)
+
+        account = Account.objects.all()
+        serializer = AccountSerializer(account, many=True)
         return Response(serializer.data)
 
 
-class UserDetail(APIView):
+class AccountDetail(APIView):
     permission_classes = [AllowAny]
     #permission_classes = [IsAuthenticated]
 
-    def get_object(self, pk):
+    def get_object(self, username):
         try:
-            return User.objects.get(pk=pk)
-        except User.DoesNotExist:
+            return Account.objects.get(username=username)
+        except Account.DoesNotExist:
             raise Http404
 
 
 
-    def get(self, request, pk, format=None):
-        user = self.get_object(pk)
-        serializer = UserSerializer(user)
+    def get(self, request, username, format=None):
+        account = self.get_object(username)
+        serializer = AccountSerializer(account)
         return Response(serializer.data)
 
-
+'''
 class ProjectList(APIView):
     # Need to fix the permission later 
     permission_classes = [AllowAny]
@@ -74,3 +84,7 @@ class ProjectDetail(APIView):
     pass
 
 
+
+
+
+'''

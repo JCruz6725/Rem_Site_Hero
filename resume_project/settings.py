@@ -22,14 +22,15 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 # SECURITY WARNING: keep the secret key used in production secret!
 # Does not matter is this is here it is not used
-# SECRET_KEY = 'django-insecure--4miyw_-w8w6o+eb$k2h@d8e@*cm_4=4g4%amy2pvpm%p5mtbm'
+
+SECRET_KEY = 'django-insecure--4miyw_-w8w6o+eb$k2h@d8e@*cm_4=4g4%amy2pvpm%p5mtbm'
 
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
 
-ALLOWED_HOSTS = ['evening-coast-33004.herokuapp.com', 'johndjangodev.herokuapp.com']
+ALLOWED_HOSTS = ['evening-coast-33004.herokuapp.com', 'johndjangodev.herokuapp.com', 'localhost:5000']
 
 
 
@@ -81,7 +82,7 @@ CORS_ALLOWED_ORIGINS = [
 ]
 
 
-AUTH_USER_MODEL = 'info_api.models.Account'
+AUTH_USER_MODEL = 'info_api.Account'
 
 
 
@@ -122,14 +123,14 @@ DATABASES = {
 
 
 
-'''
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
-'''
+
 
 
 
