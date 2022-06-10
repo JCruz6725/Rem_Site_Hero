@@ -81,6 +81,11 @@ CORS_ALLOWED_ORIGINS = [
 ]
 
 
+AUTH_USER_MODEL = 'info_api.models.Account'
+
+
+
+
 
 ROOT_URLCONF = 'resume_project.urls'
 

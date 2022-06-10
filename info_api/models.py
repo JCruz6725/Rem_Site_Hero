@@ -1,7 +1,57 @@
 from django.db import models
-from django.contrib.auth.models import User
+from django.contrib.auth.models import User, AbstractUser, BaseUserManager
 
 #refer to DB ralation diagram for full explination
+
+class AccountManager (BaseUserManager):
+    def create_user(self, email, username, password=None):
+        if not email:
+            raise ValueError ("email is required")
+            
+        if not username:
+            raise ValueError ("username is required")
+
+        new_account = self.model(email=self.normalized_email(email), username=username)
+        new_account.set_password(password)
+        new_account.save(using=self._db)
+        return new_account
+
+    def create_superuser(self, email, username, password=None):
+        new_account = self.create_user(email, username=user, password=password)
+
+        new_account.is_admin = True
+        new_account.is_superuser =True
+        new_account.is_staff =True
+        
+        new_account.save(using=self._db)
+        return new_account
+
+
+class Account (AbstractBaseUser):
+    email = models.EmailField(max_length=255, unique=True)
+    username = models.CharField(max_length=63, unique=True)
+
+    is_staff = models.BooleanField(default=False)
+    is_active = models.BooleanField(default=True)
+    is_superuser = models.BooleanField(default=False)
+
+    last_login = models.DateTimeField(auto_now=True)
+    date_joined = models.DateTimeField(auto_now_add=True)
+
+    USERNAME_FIELD = 'email'
+    REQUIRED_FIELDS = ['username']
+
+    objects = AccountManager()
+    
+    def __str__(self):
+        return self.email
+    
+    def has_perm(self, perm, obj=None):
+        return self.is_admin
+
+    def has_module_perms(self, app_label):
+        return True
+
 
 class Person (models.Model):
     user = models.ForeignKey(User, related_name='person',on_delete=models.CASCADE)
