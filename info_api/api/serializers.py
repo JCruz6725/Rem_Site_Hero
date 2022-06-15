@@ -17,7 +17,7 @@ from info_api.models import Resume, Project, Education, Professional
 class AccountSerializer (serializers.ModelSerializer):
     class Meta:
         model = Account
-        fields = ['email', 'username', 'location']
+        fields = ['email', 'full_name', 'location']
 
 
 class ResumeSerializer (serializers.ModelSerializer):

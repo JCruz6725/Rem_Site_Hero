@@ -46,7 +46,7 @@ class AccountDetail(APIView):
         return Response(serializer.data)
 
 ##################################################
-### For Current user to get/post/update/delete ###
+### For Current user to get/post/UPDATE/DELETE ###
 ##################################################
 
 class UserResumeList(APIView):
@@ -119,6 +119,11 @@ class UserProfessionalList(APIView):
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+######################################
+### For any non authenticated user ###
+######################################
 
 
 class ProfileView(APIView):
