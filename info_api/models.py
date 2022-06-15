@@ -74,6 +74,7 @@ class Project (models.Model):
     title_on_project = models.CharField(max_length=32, default='', null=False, blank=False)
     tech_used = models.CharField(max_length=32, default='', null=False, blank=False)
     summary = models.CharField(max_length=1024, default='', null=False, blank=False)
+    external_link = models.ChaField(max_length=32, default='https://github.com/', null=False, blank=False)
 
     def __str__(self):
         return self.project_name
