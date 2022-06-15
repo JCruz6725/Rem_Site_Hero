@@ -19,11 +19,9 @@ class AccountManager (BaseUserManager):
 
     def create_superuser(self, email, username, password=None):
         new_account = self.create_user(email, username=username, password=password)
-
         new_account.is_admin = True
         new_account.is_superuser =True
         new_account.is_staff =True
-        
         new_account.save(using=self._db)
         return new_account
 
@@ -48,7 +46,7 @@ class Account (AbstractBaseUser):
 
     def __str__(self):
         return self.email
-    
+
     def has_perm(self, perm, obj=None):
         return self.is_admin
 
@@ -57,53 +55,48 @@ class Account (AbstractBaseUser):
 
 
 class Resume (models.Model):
-    account_email = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='resume', on_delete=models.CASCADE)
-    title = models.CharField(max_length=32)
-    summary = models.CharField(max_length=1024)
-    programming_skills = models.CharField(max_length=1024)
-    industry_tools = models.CharField(max_length=1024)
-    office_tools = models.CharField(max_length=1024)
-    related_courses = models.CharField(max_length=1024)
+    account_email = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    title = models.CharField(max_length=32, default='', null=False, blank=False)
+    summary = models.CharField(max_length=1024, default='', null=False, blank=False)
+    programming_skills = models.CharField(max_length=1024, default='', null=False, blank=False)
+    industry_tools = models.CharField(max_length=1024, default='', null=False, blank=False)
+    office_tools = models.CharField(max_length=1024, default='', null=False, blank=False)
+    related_courses = models.CharField(max_length=1024, default='', null=False, blank=False)
     
     def __str__(self):
         return self.title
-    
-'''
-
-class Education (models.Model):
-    user_email = models.ForeignKey(User, related_name='education', on_delete=models.CASCADE)
-    institution_name = models.CharField(max_length=64)
-    location = models.CharField(max_length=64)
-    degree = models.CharField(max_length=128)
-    time_at = models.CharField(max_length=32)
-
-    def __str__(self):
-        return self.institution_name
-    
 
 
 class Project (models.Model):
-    user_email = models.ForeignKey(User, related_name='project', on_delete=models.CASCADE)
-    project_name = models.CharField(max_length=32, default='')
-    title_on_project = models.CharField(max_length=32, default='')
-    tech_used = models.CharField(max_length=32, default='')
-    summary = models.CharField(max_length=1024, default='')
+    account_email = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    project_name = models.CharField(max_length=32, default='', null=False, blank=False)
+    title_on_project = models.CharField(max_length=32, default='', null=False, blank=False)
+    tech_used = models.CharField(max_length=32, default='', null=False, blank=False)
+    summary = models.CharField(max_length=1024, default='', null=False, blank=False)
 
     def __str__(self):
         return self.project_name
-    
+
+
+class Education (models.Model):
+    account_email = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    institution_name = models.CharField(max_length=64, null=False, blank=False)
+    location = models.CharField(max_length=64, null=False, blank=False)
+    degree = models.CharField(max_length=128, null=False, blank=False)
+    time_at = models.CharField(max_length=32, null=False, blank=False)
+
+    def __str__(self):
+        return self.institution_name
 
 
 class Professional (models.Model):
-    user_email = models.ForeignKey(User, related_name='professional', on_delete=models.CASCADE)
-    employer_name = models.CharField(max_length=32)
-    position = models.CharField(max_length=32)
-    time_at = models.CharField(max_length=32)
-    title_of_project = models.CharField(max_length=32)
-    tech_used = models.CharField(max_length=64)
-    summary = models.CharField(max_length=1024)
+    account_email = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    employer_name = models.CharField(max_length=32, null=False, blank=False)
+    position = models.CharField(max_length=32, null=False, blank=False)
+    time_at = models.CharField(max_length=32, null=False, blank=False)
+    title_of_project = models.CharField(max_length=32, null=False, blank=False)
+    tech_used = models.CharField(max_length=64, null=False, blank=False)
+    summary = models.CharField(max_length=1024, null=False, blank=False)
 
     def __str__(self):
         return self.title_of_project
-    
-'''

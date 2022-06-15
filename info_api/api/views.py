@@ -1,27 +1,21 @@
-
-from django.http import HttpResponse, JsonResponse
-
 from rest_framework import status
-from rest_framework.decorators import api_view
 from rest_framework.views import APIView
-from django.views.decorators.csrf import csrf_exempt
 from rest_framework.response import Response
 from rest_framework.permissions import AllowAny
 
-
-
-#from info_api.models import Resume, Education, Project, Professional, Person
-#from django.contrib.auth.models import User
 #from .serializers import UserSerializer, ProjectSerializer
-from .serializers import AccountSerializer
+from info_api.api.serializers import (AccountSerializer, 
+                                    ResumeSerializer, 
+                                    ProjectSerializer, 
+                                    EducationSerializer, 
+                                    ProfessionalSerializer )
 
+from info_api.models import Resume, Project, Professional, Education
 from django.conf import settings #for *settings.AUTH_USER_MODEL*
-
-
 from django.contrib.auth import get_user_model
-
-
 Account = get_user_model()
+
+
 
 
 class AccountList(APIView):
@@ -45,46 +39,84 @@ class AccountDetail(APIView):
         except Account.DoesNotExist:
             raise Http404
 
-
-
     def get(self, request, username, format=None):
         account = self.get_object(username)
         serializer = AccountSerializer(account)
         return Response(serializer.data)
 
-'''
-class ProjectList(APIView):
-    # Need to fix the permission later 
+##################################################
+### For Current user to get/post/update/delete ###
+##################################################
+
+class UserResumeList(APIView):
     permission_classes = [AllowAny]
 
     def get(self, request, format=None):
-        project = Project.objects.all()
-        serializer = ProjectSerializer(project, many=True)
+        resume = Resume.objects.filter(account_email=request.user)
+        serializer = ResumeSerializer(resume, many=True)
         return Response(serializer.data)
 
     def post(self, request, format=None):
-        serializer = ProjectSerializer(data=request.data)
-        
-
-        #user = request.data['user_email']
-        #serializer = UserSerializer(user, many=False)
-        #return Response(serializer.data)
-        #serializer.data[] = user.email
-        if (serializer.is_valid()):
-            user_instance = User.objects.get()
-
-            new_project = Project.Create(serializer.data)
-
-            serializer.updata(newPro, serializer.data)
+        account = Account.objects.get(email=request.user)
+        resume = Resume.objects.create(account_email=account)
+        serializer = ResumeSerializer(resume, data=request.data)
+        if serializer.is_valid():
+            serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
-class ProjectDetail(APIView):
-    pass
+class UserProjectList(APIView):
+    permission_classes = [AllowAny]
+
+    def get(self, request, format=None):
+        project = Project.objects.filter(account_email=request.user)
+        serializer = ProjectSerializer(project, many=True)
+        return Response(serializer.data)
+
+    def post(self, request, format=None):
+        account = Account.objects.get(email=request.user)
+        project = Project.objects.create(account_email=account)
+        serializer = ProjectSerializer(project, data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
+class UserEducationList(APIView):
+    permission_classes = [AllowAny]
+
+    def get(self, request, format=None):
+        education = Education.objects.filter(account_email=request.user)
+        serializer = EducationSerializer(education, many=True)
+        return Response(serializer.data)
+
+    def post(self, request, format=None):
+        account = Account.objects.get(email=request.user)
+        education = Education.objects.create(account_email=account)
+        serializer = EducationSerializer(education, data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
+class UserProfessionalList(APIView):
+    permission_classes = [AllowAny]
 
-'''
+    def get(self, request, format=None):
+        professional = Professional.objects.filter(account_email=request.user)
+        serializer = ProfessionalSerializer(professional, many=True)
+        return Response(serializer.data)
+
+    def post(self, request, format=None):
+        account = Account.objects.get(email=request.user)
+        professional = Professional.objects.create(account_email=account)
+        serializer = ProfessionalSerializer(professional, data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
