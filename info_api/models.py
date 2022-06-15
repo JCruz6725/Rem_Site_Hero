@@ -29,6 +29,7 @@ class AccountManager (BaseUserManager):
 class Account (AbstractBaseUser):
     email = models.EmailField(max_length=255, unique=True)
     username = models.CharField(max_length=63, unique=True)
+    full_name = models.CharField(max_length=63, unique=False)
     location = models.CharField(max_length=63, blank=True)
     
     is_staff = models.BooleanField(default=False)
