@@ -55,7 +55,7 @@ class Account (AbstractBaseUser):
 
 
 class Resume (models.Model):
-    account_email = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    account_email = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='resume',  on_delete=models.CASCADE)
     title = models.CharField(max_length=32, default='', null=False, blank=False)
     summary = models.CharField(max_length=1024, default='', null=False, blank=False)
     programming_skills = models.CharField(max_length=1024, default='', null=False, blank=False)
@@ -68,7 +68,7 @@ class Resume (models.Model):
 
 
 class Project (models.Model):
-    account_email = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    account_email = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='project', on_delete=models.CASCADE)
     project_name = models.CharField(max_length=32, default='', null=False, blank=False)
     title_on_project = models.CharField(max_length=32, default='', null=False, blank=False)
     tech_used = models.CharField(max_length=32, default='', null=False, blank=False)
@@ -79,7 +79,7 @@ class Project (models.Model):
 
 
 class Education (models.Model):
-    account_email = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    account_email = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='education', on_delete=models.CASCADE)
     institution_name = models.CharField(max_length=64, null=False, blank=False)
     location = models.CharField(max_length=64, null=False, blank=False)
     degree = models.CharField(max_length=128, null=False, blank=False)
@@ -90,7 +90,7 @@ class Education (models.Model):
 
 
 class Professional (models.Model):
-    account_email = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    account_email = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='professional', on_delete=models.CASCADE)
     employer_name = models.CharField(max_length=32, null=False, blank=False)
     position = models.CharField(max_length=32, null=False, blank=False)
     time_at = models.CharField(max_length=32, null=False, blank=False)

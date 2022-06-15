@@ -4,7 +4,7 @@ from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
 
 
 #from .models import Person, Resume, Education, Project, Professional, Account
-from .models import Account, Resume, Project
+from .models import Account, Resume, Project, Education, Professional
 
 
 
@@ -53,7 +53,7 @@ admin.site.register(Project)#need to fix this, breaks when adding the admin part
 
 #admin.site.register(Person)
 #admin.site.register(Resume)
-#admin.site.register(Education)
+admin.site.register(Education)
 #admin.site.register(Project)
-#admin.site.register(Professional)
+admin.site.register(Professional)
 

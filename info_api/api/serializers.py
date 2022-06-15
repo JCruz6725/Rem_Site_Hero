@@ -12,6 +12,8 @@ from info_api.models import Resume, Project, Education, Professional
 #from django.contrib.auth.models import User
 
 
+
+
 class AccountSerializer (serializers.ModelSerializer):
     class Meta:
         model = Account
@@ -19,14 +21,14 @@ class AccountSerializer (serializers.ModelSerializer):
 
 
 class ResumeSerializer (serializers.ModelSerializer):
-    #account_email = AccountSerializer()
+    #account_email = ProfileSerializer()
     class Meta:
         model = Resume
         fields = "__all__"
         extra_kwargs = {'account_email': {'required': False}}
 
 class ProjectSerializer (serializers.ModelSerializer):
-    #user_email = serializers.CharField(source=("user_email.email"), read_only=False)
+    #account_email = serializers.CharField(source=("Account.email"), read_only=False)
     class Meta:
         model = Project
         fields = "__all__"
@@ -46,3 +48,15 @@ class ProfessionalSerializer (serializers.ModelSerializer):
         model = Professional
         fields = "__all__"
         extra_kwargs = {'account_email': {'required': False}}
+
+### Profile will be what is shown in the main section ###
+
+class ProfileSerializer (serializers.ModelSerializer):
+    resume = ResumeSerializer(many=True, read_only=True)
+    education = EducationSerializer(many=True, read_only=True)
+    project = ProjectSerializer(many=True, read_only=True)
+    professional = ProfessionalSerializer(many=True, read_only=True)
+
+    class Meta:
+        model = Account
+        fields = ['email', 'resume', 'professional', 'project', 'education']

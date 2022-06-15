@@ -1,14 +1,15 @@
 from rest_framework import status
 from rest_framework.views import APIView
 from rest_framework.response import Response
-from rest_framework.permissions import AllowAny
+from rest_framework.permissions import AllowAny, IsAuthenticated
 
 #from .serializers import UserSerializer, ProjectSerializer
 from info_api.api.serializers import (AccountSerializer, 
                                     ResumeSerializer, 
                                     ProjectSerializer, 
                                     EducationSerializer, 
-                                    ProfessionalSerializer )
+                                    ProfessionalSerializer,
+                                    ProfileSerializer )
 
 from info_api.models import Resume, Project, Professional, Education
 from django.conf import settings #for *settings.AUTH_USER_MODEL*
@@ -49,7 +50,7 @@ class AccountDetail(APIView):
 ##################################################
 
 class UserResumeList(APIView):
-    permission_classes = [AllowAny]
+    permission_classes = [IsAuthenticated]
 
     def get(self, request, format=None):
         resume = Resume.objects.filter(account_email=request.user)
@@ -67,7 +68,7 @@ class UserResumeList(APIView):
 
 
 class UserProjectList(APIView):
-    permission_classes = [AllowAny]
+    permission_classes = [IsAuthenticated]
 
     def get(self, request, format=None):
         project = Project.objects.filter(account_email=request.user)
@@ -85,7 +86,7 @@ class UserProjectList(APIView):
 
 
 class UserEducationList(APIView):
-    permission_classes = [AllowAny]
+    permission_classes = [IsAuthenticated]
 
     def get(self, request, format=None):
         education = Education.objects.filter(account_email=request.user)
@@ -103,7 +104,7 @@ class UserEducationList(APIView):
 
 
 class UserProfessionalList(APIView):
-    permission_classes = [AllowAny]
+    permission_classes = [IsAuthenticated]
 
     def get(self, request, format=None):
         professional = Professional.objects.filter(account_email=request.user)
@@ -120,3 +121,22 @@ class UserProfessionalList(APIView):
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
+class ProfileView(APIView):
+    permission_classes = [AllowAny]
+
+    def get_account_object(self, email):
+        try:
+            return Account.objects.get(email=email)
+        except Account.DoesNotExist:
+            raise Http404
+
+    def get_resume_object(self, title):
+        try:
+            return Resume.objects.get(title=title)
+        except Resume.DoesNotExist:
+            raise Http404
+
+    def get(self, request, email, format=None):
+        account = self.get_account_object(email)
+        serializer = ProfileSerializer(account)
+        return Response(serializer.data)
