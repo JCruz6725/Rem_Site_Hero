@@ -14,7 +14,7 @@ urlpatterns = [
     path('professional/', views.UserProfessionalList.as_view()),
 
 
-    path('profile/<str:email>/<str:resume>', views.ProfileView.as_view()),
+    path('profile/<str:email>/', views.ProfileView.as_view()),
 
 
 ]

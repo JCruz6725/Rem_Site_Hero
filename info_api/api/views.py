@@ -129,13 +129,13 @@ class ProfileView(APIView):
             return Account.objects.get(email=email)
         except Account.DoesNotExist:
             raise Http404
-
+    '''
     def get_resume_object(self, title):
         try:
             return Resume.objects.get(title=title)
         except Resume.DoesNotExist:
             raise Http404
-
+    '''
     def get(self, request, email, format=None):
         account = self.get_account_object(email)
         serializer = ProfileSerializer(account)

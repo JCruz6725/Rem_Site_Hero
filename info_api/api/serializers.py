@@ -59,4 +59,4 @@ class ProfileSerializer (serializers.ModelSerializer):
 
     class Meta:
         model = Account
-        fields = ['email', 'resume', 'professional', 'project', 'education']
+        fields = ['email', 'location', 'resume', 'professional', 'project', 'education']
