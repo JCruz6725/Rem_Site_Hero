@@ -2,6 +2,9 @@ from rest_framework import status
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework.permissions import AllowAny, IsAuthenticated
+from rest_framework.authentication import SessionAuthentication, BasicAuthentication
+
+
 
 #from .serializers import UserSerializer, ProjectSerializer
 from info_api.api.serializers import (AccountSerializer, 
@@ -18,13 +21,12 @@ Account = get_user_model()
 
 
 
-
+#delete this...?
 class AccountList(APIView):
     permission_classes = [AllowAny]
     #permission_classes = [IsAuthenticated]
 
     def get(self, request, format=None):
-
         account = Account.objects.all()
         serializer = AccountSerializer(account, many=True)
         return Response(serializer.data)
@@ -51,6 +53,7 @@ class AccountDetail(APIView):
 
 class UserResumeList(APIView):
     permission_classes = [IsAuthenticated]
+    authentication_classes = [SessionAuthentication, BasicAuthentication]
 
     def get(self, request, format=None):
         resume = Resume.objects.filter(account_email=request.user)
@@ -66,9 +69,13 @@ class UserResumeList(APIView):
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
+    def update(self, request, format=None):
+        pass
+
 
 class UserProjectList(APIView):
     permission_classes = [IsAuthenticated]
+    authentication_classes = [SessionAuthentication, BasicAuthentication]
 
     def get(self, request, format=None):
         project = Project.objects.filter(account_email=request.user)
@@ -84,9 +91,13 @@ class UserProjectList(APIView):
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
+    def update(self, request, format=None):
+        pass
+
 
 class UserEducationList(APIView):
     permission_classes = [IsAuthenticated]
+    authentication_classes = [SessionAuthentication, BasicAuthentication]
 
     def get(self, request, format=None):
         education = Education.objects.filter(account_email=request.user)
@@ -102,9 +113,13 @@ class UserEducationList(APIView):
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
+    def update(self, request, format=None):
+        pass
+
 
 class UserProfessionalList(APIView):
     permission_classes = [IsAuthenticated]
+    authentication_classes = [SessionAuthentication, BasicAuthentication]
 
     def get(self, request, format=None):
         professional = Professional.objects.filter(account_email=request.user)
@@ -120,6 +135,8 @@ class UserProfessionalList(APIView):
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
+    def update(self, request, format=None):
+        pass
 
 ######################################
 ### For any non authenticated user ###
@@ -134,14 +151,54 @@ class ProfileView(APIView):
             return Account.objects.get(email=email)
         except Account.DoesNotExist:
             raise Http404
-    '''
-    def get_resume_object(self, title):
-        try:
-            return Resume.objects.get(title=title)
-        except Resume.DoesNotExist:
-            raise Http404
-    '''
+
     def get(self, request, email, format=None):
         account = self.get_account_object(email)
         serializer = ProfileSerializer(account)
         return Response(serializer.data)
+
+
+#################################################
+
+class ProfileResumeView(APIView):
+    permission_classes = [AllowAny]
+
+    def get_account_object(self, email):
+        try:
+            return Account.objects.get(email=email)
+        except Account.DoesNotExist:
+            raise Http404
+
+    def filter_resume(self, title, serializer):
+
+        #filter Resume
+        res_filter = 'No resume matching ' + title
+        for r in range (0 , len(serializer.data['resume'])):
+            if (serializer.data['resume'][r]['title'] == title ):
+                res_filter = serializer.data['resume'][r]
+        serializer.data['resume'].clear()
+        serializer.data['resume'].append(res_filter)
+
+        #filter Professional exp
+        professional_filter = []
+        for p in range (0 , len(serializer.data['professional'])):
+            if (serializer.data['professional'][p]['resume_title'] == title ):
+                professional_filter.append(serializer.data['professional'][p])
+        serializer.data['professional'].clear()
+        for p in professional_filter:
+            serializer.data['professional'].append(p)
+
+        #filter Project
+
+
+        return serializer
+
+
+        
+
+    def get(self, request, email, title, format=None):
+        account = self.get_account_object(email)
+        serializer = ProfileSerializer(account)
+        serializer = self.filter_resume(title, serializer)
+        return Response(serializer.data)
+        
