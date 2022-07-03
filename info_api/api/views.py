@@ -91,8 +91,24 @@ class UserProjectList(APIView):
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
+
+##### WORKING HERE #######
+class UserProjectDetail(APIView):
+    permission_classes = [IsAuthenticated]
+    authentication_classes = [SessionAuthentication, BasicAuthentication]
+
+    def get(self, request, format=None):
+        project = Project.objects.filter(account_email=request.user)
+        
+
+        serializer = ProjectSerializer(project, many=True)
+        return Response(serializer.data)
+
     def update(self, request, format=None):
         pass
+
+
+
 
 
 class UserEducationList(APIView):
@@ -169,7 +185,7 @@ class ProfileResumeView(APIView):
         except Account.DoesNotExist:
             raise Http404
 
-    def filter_resume(self, title, serializer):
+    def filter_by_resume(self, title, serializer):
 
         #filter Resume
         res_filter = 'No resume matching ' + title
@@ -178,6 +194,7 @@ class ProfileResumeView(APIView):
                 res_filter = serializer.data['resume'][r]
         serializer.data['resume'].clear()
         serializer.data['resume'].append(res_filter)
+
 
         #filter Professional exp
         professional_filter = []
@@ -188,17 +205,36 @@ class ProfileResumeView(APIView):
         for p in professional_filter:
             serializer.data['professional'].append(p)
 
+
         #filter Project
+        project_filter = []
+        for p in range (0 , len(serializer.data['project'])):
+            if (serializer.data['project'][p]['resume_title'] == title ):
+                project_filter.append(serializer.data['project'][p])
+        serializer.data['project'].clear()
+        for p in project_filter:
+            serializer.data['project'].append(p)
 
 
         return serializer
 
+    def filter(self, string_catagory, string_filter):
+        #filter Project
+        c_filter = []
+        for p in range (0 , len(serializer.data[string_catagory])):
+            if (serializer.data[string_catagory][p]['resume_title'] == string_filter ):
+                c_filter.append(serializer.data[string_catagory][p])
+        serializer.data[string_catagory].clear()
+        for p in c_filter:
+            serializer.data[string_catagory].append(p)
 
+
+        return serializer
         
 
     def get(self, request, email, title, format=None):
         account = self.get_account_object(email)
         serializer = ProfileSerializer(account)
-        serializer = self.filter_resume(title, serializer)
+        serializer = self.filter_by_resume(title, serializer)
         return Response(serializer.data)
         
