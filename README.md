@@ -1,9 +1,10 @@
-# django rest framework based resume system
-A django REST framework based system that is easy to deploy allowing the user to solely focus on frontend hook up and design.
+# django rest framework based Resume System
+A django REST framework based system that is easy to deploy allowing the user to solely focus on frontend hook up and design. The system can host a multitude of resumes from a multitude of users.
+
 ## Relational map for django ORM
 ![ORM MAP](./Backend_Design/DB_scheme_resume_site_v_1_1.PNG "ORM")
 
-To add and edit this map [here](https://dbdiagram.io/d) and copy and paste the contents of ./Backend_Design/DB_scheme_resume_site_v_1_1.txt there you
+To add and edit to this map; copy the contents of ./Backend_Design/DB_scheme_resume_site_v_1_1.txt and paste it [here](https://dbdiagram.io/d).
 
 
 ## Rapid Deployment  
