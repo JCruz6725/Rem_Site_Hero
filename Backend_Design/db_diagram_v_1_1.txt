@@ -1,0 +1,67 @@
+//// https://dbdiagram.io/d
+
+//// -- LEVEL 1
+//// -- Tables and References
+
+// Top Level
+Table Account {
+  //id int [pk, increment]
+  full_name varchar
+  email email [pk]
+  location varchar
+  username varchar
+  
+  is_staff boolean
+  is_active boolean
+  is_admin boolean
+  is_superuser boolean
+  
+  last_login datetime
+  date_join datetime
+}
+
+
+// Level 2
+Table Resume {
+  account_email email [ref: > Account.email]
+  title varchar [pk]
+  summary varchar
+  programming_skills varchar
+  industry_tools varchar
+  office_tools varchar
+  related_corses varchar
+}
+
+Table Project_{
+  account_email email [ref:  > Account.email]
+  resume_title varcharacter [ref: > Resume.title]
+  
+  project_name varchar //[ref: > Resume.project_xp_name]
+  title_on_project varchar
+  tech_used varchar
+  summary varchar
+  external_link varchar
+}
+
+Table Education {
+  account_email email [ref:  > Account.email]
+  institution_name varchar
+  degree varchar
+  time_at varchar
+  location varchar
+}
+
+
+
+Table Professional_xp {
+  account_email email [ref:  > Account.email]
+  resume_title varchar [ref: > Resume.title]
+  employer_name varchar //[ref: > Resume.professional_xp_name]
+  position varchar
+  time_at varchar
+  title_on_project varchar
+  tech_used varchar
+  summary varchar
+}
+
+
