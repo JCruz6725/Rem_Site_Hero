@@ -84,7 +84,8 @@ class UserProjectList(APIView):
 
     def post(self, request, format=None):
         account = Account.objects.get(email=request.user)
-        project = Project.objects.create(account_email=account)
+        resume = Resume.objects.get(title=request.data['resume_title'])
+        project = Project.objects.create(account_email=account, resume_title=resume)
         serializer = ProjectSerializer(project, data=request.data)
         if serializer.is_valid():
             serializer.save()
@@ -92,20 +93,30 @@ class UserProjectList(APIView):
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
-##### WORKING HERE #######
+## not in use?? ##
 class UserProjectDetail(APIView):
     permission_classes = [IsAuthenticated]
     authentication_classes = [SessionAuthentication, BasicAuthentication]
 
     def get(self, request, format=None):
         project = Project.objects.filter(account_email=request.user)
-        
-
         serializer = ProjectSerializer(project, many=True)
         return Response(serializer.data)
 
-    def update(self, request, format=None):
-        pass
+##### WORKING HERE #######
+class UserProjectUpdate(APIView):
+    permission_classes = [IsAuthenticated]
+    authentication_classes = [SessionAuthentication, BasicAuthentication]
+
+
+    def update(self, request, project_name, format=None):
+        project = Project.objects.get(project_name=project_name)#.filter(project_name=project_name)
+        serializer = ProjectSerializer(project, data=request.data, partial=True)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
 
 
 

@@ -11,6 +11,8 @@ urlpatterns = [
     path('resume/', views.UserResumeList.as_view()),
 
     path('project/', views.UserProjectList.as_view()),
+    path('project/<str:project_name>', views.UserProjectUpdate.as_view()),
+    
     path('education/', views.UserEducationList.as_view()),
     path('professional/', views.UserProfessionalList.as_view()),
 
