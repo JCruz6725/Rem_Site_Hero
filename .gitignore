@@ -6,4 +6,4 @@ db.sqlite3
 getting-started/*
 .bak
 resume_project/settings.py
-info_api/migrations/[0000-9999]_initial.py
+info_api/migrations/*
