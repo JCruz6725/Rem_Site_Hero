@@ -6,7 +6,7 @@ ideal would be single page app?????
 ## Relational map for django ORM
 ![ORM MAP](./Backend_Design/DB_scheme_resume_site_v_1_1.PNG "ORM")
 
-To add and edit to this map; copy the contents of ./Backend_Design/DB_scheme_resume_site_v_1_1.txt and paste it [here](https://dbdiagram.io/d).
+To add and edit to this map; copy the contents of ./Backend_Design/db_diagram_v_1_1.txt and paste it [here](https://dbdiagram.io/d).
 
 
 ## Rapid Deployment  
