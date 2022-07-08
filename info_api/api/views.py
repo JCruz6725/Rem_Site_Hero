@@ -21,6 +21,12 @@ Account = get_user_model()
 
 
 
+
+# update will not update the fk will need to implement this here to
+# https://www.django-rest-framework.org/api-guide/relations/#writable-nested-serializers
+
+
+
 #delete this...?
 class AccountList(APIView):
     permission_classes = [AllowAny]
@@ -129,7 +135,8 @@ class UserProjectDetailCRUD(APIView):
 
     #UPDATE
     def put(self, request, project_name, format=None):
-        project = Project.objects.get(project_name=project_name)#.filter(project_name=project_name)
+        project = Project.objects.get(project_name=project_name)
+        resume = Resume
         serializer = ProjectSerializer(project, data=request.data, partial=True)
         if serializer.is_valid():
             serializer.save()
