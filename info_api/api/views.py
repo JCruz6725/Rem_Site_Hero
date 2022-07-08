@@ -31,7 +31,6 @@ class AccountList(APIView):
         serializer = AccountSerializer(account, many=True)
         return Response(serializer.data)
 
-
 class AccountDetail(APIView):
     permission_classes = [AllowAny]
     #permission_classes = [IsAuthenticated]
@@ -51,6 +50,7 @@ class AccountDetail(APIView):
 ### For Current user to get/post/UPDATE/DELETE ###
 ##################################################
 
+### User Resume
 class UserResumeList(APIView):
     permission_classes = [IsAuthenticated]
     authentication_classes = [SessionAuthentication, BasicAuthentication]
@@ -60,6 +60,7 @@ class UserResumeList(APIView):
         serializer = ResumeSerializer(resume, many=True)
         return Response(serializer.data)
 
+    #CREATE
     def post(self, request, format=None):
         account = Account.objects.get(email=request.user)
         resume = Resume.objects.create(account_email=account)
@@ -69,10 +70,33 @@ class UserResumeList(APIView):
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-    def update(self, request, format=None):
-        pass
+class UserResumeDetailCRUD(APIView):
+    permission_classes = [IsAuthenticated]
+    authentication_classes = [SessionAuthentication, BasicAuthentication]
+
+    #READ
+    def get(self, request, title, format=None):
+        resume = Resume.objects.get(title=title)
+        serializer = ResumeSerializer(resume)
+        return Response(serializer.data)
+
+    #UPDATE
+    def put(self, request, title, format=None):
+        resume = Resume.objects.get(title=title)
+        serializer = ResumeSerializer(resume, data=request.data, partial=True)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+    #DELETE
+    def delete(self, request, title, format=None):
+        resume = Resume.objects.get(title=title)
+        resume.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)
 
 
+### User Projects
 class UserProjectList(APIView):
     permission_classes = [IsAuthenticated]
     authentication_classes = [SessionAuthentication, BasicAuthentication]
@@ -81,7 +105,8 @@ class UserProjectList(APIView):
         project = Project.objects.filter(account_email=request.user)
         serializer = ProjectSerializer(project, many=True)
         return Response(serializer.data)
-
+    
+    #CREATE
     def post(self, request, format=None):
         account = Account.objects.get(email=request.user)
         resume = Resume.objects.get(title=request.data['resume_title'])
@@ -92,24 +117,18 @@ class UserProjectList(APIView):
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-
-## not in use?? ##
-class UserProjectDetail(APIView):
+class UserProjectDetailCRUD(APIView):
     permission_classes = [IsAuthenticated]
     authentication_classes = [SessionAuthentication, BasicAuthentication]
 
-    def get(self, request, format=None):
-        project = Project.objects.filter(account_email=request.user)
-        serializer = ProjectSerializer(project, many=True)
+    #READ
+    def get(self, request, project_name,format=None):
+        project = Project.objects.get(project_name=project_name)
+        serializer = ProjectSerializer(project)
         return Response(serializer.data)
 
-##### WORKING HERE #######
-class UserProjectUpdate(APIView):
-    permission_classes = [IsAuthenticated]
-    authentication_classes = [SessionAuthentication, BasicAuthentication]
-
-
-    def update(self, request, project_name, format=None):
+    #UPDATE
+    def put(self, request, project_name, format=None):
         project = Project.objects.get(project_name=project_name)#.filter(project_name=project_name)
         serializer = ProjectSerializer(project, data=request.data, partial=True)
         if serializer.is_valid():
@@ -117,11 +136,14 @@ class UserProjectUpdate(APIView):
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
+    #DELETE
+    def delete(self, request, project_name, format=None):
+        project = Project.objects.get(project_name=project_name)
+        project.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)
 
 
-
-
-
+### User Education
 class UserEducationList(APIView):
     permission_classes = [IsAuthenticated]
     authentication_classes = [SessionAuthentication, BasicAuthentication]
@@ -131,6 +153,7 @@ class UserEducationList(APIView):
         serializer = EducationSerializer(education, many=True)
         return Response(serializer.data)
 
+    #CREATE
     def post(self, request, format=None):
         account = Account.objects.get(email=request.user)
         education = Education.objects.create(account_email=account)
@@ -140,10 +163,33 @@ class UserEducationList(APIView):
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-    def update(self, request, format=None):
-        pass
+class UserEducationDetailCRUD(APIView):
+    permission_classes = [IsAuthenticated]
+    authentication_classes = [SessionAuthentication, BasicAuthentication]
+
+    #READ
+    def get(self, request, institution_name, format=None):
+        education = Education.objects.get(institution_name=institution_name)
+        serializer = EducationSerializer(education)
+        return Response(serializer.data)
+
+    #UPDATE
+    def put(self, request, institution_name, format=None):
+        education = Education.objects.get(project_name=project_name)
+        serializer = ProjectSerializer(education, data=request.data, partial=True)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+    #DELETE
+    def delete(self, request, institution_name, format=None):
+        education = Education.objects.get(institution_name=institution_name)
+        education.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)
 
 
+### User Professional 
 class UserProfessionalList(APIView):
     permission_classes = [IsAuthenticated]
     authentication_classes = [SessionAuthentication, BasicAuthentication]
@@ -165,11 +211,35 @@ class UserProfessionalList(APIView):
     def update(self, request, format=None):
         pass
 
+class UserProfessionalDetailCRUD(APIView):
+    permission_classes = [IsAuthenticated]
+    authentication_classes = [SessionAuthentication, BasicAuthentication]
+
+    #READ
+    def get(self, request, employer_name, format=None):
+        p = Professional.objects.get(employer_name=employer_name)
+        serializer = ProfessionalSerializer(p)
+        return Response(serializer.data)
+
+    #UPDATE
+    def put(self, request, employer_name, format=None):
+        p = Professional.objects.get(employer_name=employer_name)
+        serializer = ProfessionalSerializer(p, data=request.data, partial=True)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+    #DELETE
+    def delete(self, request, employer_name, format=None):
+        p = Professional.objects.get(employer_name=employer_name)
+        p.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)
+
+
 ######################################
 ### For any non authenticated user ###
 ######################################
-
-
 class ProfileView(APIView):
     permission_classes = [AllowAny]
 
@@ -184,9 +254,7 @@ class ProfileView(APIView):
         serializer = ProfileSerializer(account)
         return Response(serializer.data)
 
-
-#################################################
-
+### Use this to filter between endpoints
 class ProfileResumeView(APIView):
     permission_classes = [AllowAny]
 
@@ -248,4 +316,3 @@ class ProfileResumeView(APIView):
         serializer = ProfileSerializer(account)
         serializer = self.filter_by_resume(title, serializer)
         return Response(serializer.data)
-        
