@@ -21,33 +21,35 @@ class AccountSerializer (serializers.ModelSerializer):
 
 
 class ResumeSerializer (serializers.ModelSerializer):
-    #account_email = ProfileSerializer()
+    account_email = serializers.StringRelatedField() #serializers.CharField(source=("Account"), read_only=False)
     class Meta:
         model = Resume
         fields = "__all__"
         extra_kwargs = {'account_email': {'required': False}}
 
 class ProjectSerializer (serializers.ModelSerializer):
-    #account_email = serializers.CharField(source=("Account.email"), read_only=False)
+    account_email = serializers.StringRelatedField() #serializers.CharField(source=("Account.email"), read_only=False)
+    resume_title = serializers.StringRelatedField()
     class Meta:
         model = Project
         fields = "__all__"
-        extra_kwargs = {'account_email': {'required': False}}
+        extra_kwargs = {'account_email': {'required': False}, 'resume_title':{'required': False} }
 
 
 class EducationSerializer (serializers.ModelSerializer):
-    #user_email = serializers.CharField(source=("user_email.email"))
+    account_email = serializers.StringRelatedField() #serializers.CharField(source=("user_email.email"))
     class Meta:
         model = Education
         fields = "__all__"
         extra_kwargs = {'account_email': {'required': False}}
 
 class ProfessionalSerializer (serializers.ModelSerializer):
-    #user_email = serializers.CharField(source=("user_email.email"))
+    account_email = serializers.StringRelatedField() #CharField(source=("user_email.email"))
+    resume_title = serializers.StringRelatedField()
     class Meta:
         model = Professional
         fields = "__all__"
-        extra_kwargs = {'account_email': {'required': False}}
+        extra_kwargs = {'account_email': {'required': False}, 'resume_title':{'required': False} }
 
 ### Profile will be what is shown in the main section ###
 

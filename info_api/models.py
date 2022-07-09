@@ -40,7 +40,7 @@ class Account (AbstractBaseUser):
     last_login = models.DateTimeField(auto_now=True)
     date_joined = models.DateTimeField(auto_now_add=True)
 
-    USERNAME_FIELD = 'email'
+    USERNAME_FIELD = 'email' # this is user for the login
     REQUIRED_FIELDS = ['username']
 
     objects = AccountManager()
@@ -70,6 +70,7 @@ class Resume (models.Model):
 
 class Project (models.Model):
     account_email = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='project', on_delete=models.CASCADE)
+    resume_title = models.ForeignKey(Resume, related_name='project_rt', on_delete=models.CASCADE)
     project_name = models.CharField(max_length=32, default='', null=False, blank=False)
     title_on_project = models.CharField(max_length=32, default='', null=False, blank=False)
     tech_used = models.CharField(max_length=32, default='', null=False, blank=False)
@@ -93,12 +94,14 @@ class Education (models.Model):
 
 class Professional (models.Model):
     account_email = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='professional', on_delete=models.CASCADE)
+    resume_title = models.ForeignKey(Resume, related_name='professional_rt', on_delete=models.CASCADE)
     employer_name = models.CharField(max_length=32, null=False, blank=False)
     position = models.CharField(max_length=32, null=False, blank=False)
     time_at = models.CharField(max_length=32, null=False, blank=False)
     title_of_project = models.CharField(max_length=32, null=False, blank=False)
     tech_used = models.CharField(max_length=64, null=False, blank=False)
     summary = models.CharField(max_length=1024, null=False, blank=False)
+
 
     def __str__(self):
         return self.title_of_project
