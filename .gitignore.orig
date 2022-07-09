@@ -5,5 +5,9 @@ staticfiles
 db.sqlite3
 getting-started/*
 .bak
+<<<<<<< HEAD
+resume_project/settings.py
+=======
 info_api/migrations/*
 !info_api/migrations/__init__.py
+>>>>>>> dev
