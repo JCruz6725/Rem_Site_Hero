@@ -5,6 +5,5 @@ staticfiles
 db.sqlite3
 getting-started/*
 .bak
-
 info_api/migrations/*
 !info_api/migrations/__init__.py
