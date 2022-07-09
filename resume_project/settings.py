@@ -121,14 +121,14 @@ WSGI_APPLICATION = 'resume_project.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
 
-'''
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgressql_psycopg2',
         'NAME': 'info_api_app',
     }
 }
-'''
+
 
 
 
