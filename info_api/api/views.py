@@ -139,7 +139,6 @@ class UserProjectDetailCRUD(APIView):
     #UPDATE
     def put(self, request, project_name, format=None):
         project = Project.objects.get(project_name=project_name)
-
         serializer = ProjectSerializer(project, data=request.data, partial=True)
         if serializer.is_valid():
             serializer.save()
