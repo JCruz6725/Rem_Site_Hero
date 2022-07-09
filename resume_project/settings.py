@@ -36,7 +36,7 @@ DATABASES = {
 
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 
 ALLOWED_HOSTS = ['evening-coast-33004.herokuapp.com', 'johndjangodev.herokuapp.com', 'localhost:5000']
