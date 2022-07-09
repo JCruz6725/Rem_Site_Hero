@@ -31,8 +31,9 @@ Account = get_user_model()
 
 
 #delete this...?
+'''
 class AccountList(APIView):
-    permission_classes = [AllowAny]
+    #permission_classes = [AllowAny]
     #permission_classes = [IsAuthenticated]
 
     def get(self, request, format=None):
@@ -54,7 +55,7 @@ class AccountDetail(APIView):
         account = self.get_object(username)
         serializer = AccountSerializer(account)
         return Response(serializer.data)
-
+'''
 ##################################################
 ### For Current user to get/post/UPDATE/DELETE ###
 ##################################################
