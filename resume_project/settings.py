@@ -40,7 +40,7 @@ if (BRANCH == 'dev')
     }
 }
 
-elif (bRANCH == 'main')
+elif (BRANCH == 'main')
 {
     DATABASES = {
         'default': {
