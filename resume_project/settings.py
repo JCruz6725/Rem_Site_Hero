@@ -29,7 +29,7 @@ BRANCH = 'main'
 DEBUG = True
 
 
-if (BRANCH == 'dev')
+if (BRANCH == 'dev'):
 {
     SECRET_KEY = 'django-insecure--4miyw_-w8w6o+eb$k2h@d8e@*cm_4=4g4%amy2pvpm%p5mtbm'
     DATABASES = {
@@ -40,7 +40,7 @@ if (BRANCH == 'dev')
     }
 }
 
-elif (BRANCH == 'main')
+elif (BRANCH == 'main'):
 {
     DATABASES = {
         'default': {
