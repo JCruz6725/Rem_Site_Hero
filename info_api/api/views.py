@@ -86,7 +86,8 @@ class UserResumeDetailCRUD(APIView):
 
     #READ
     def get(self, request, title, format=None):
-        resume = Resume.objects.get(title=title)
+        account = Account.objects.get(email=request.user)
+        resume = Resume.objects.get(title=title, account_email=account)
         serializer = ResumeSerializer(resume)
         return Response(serializer.data)
 
@@ -133,7 +134,7 @@ class UserProjectDetailCRUD(APIView):
 
     #READ
     def get(self, request, project_name,format=None):
-        project = Project.objects.get(project_name=project_name)
+        project = Project.objects.get(project_name=project_name, account_email=request.user)
         serializer = ProjectSerializer(project)
         return Response(serializer.data)
 
@@ -179,7 +180,8 @@ class UserEducationDetailCRUD(APIView):
 
     #READ
     def get(self, request, institution_name, format=None):
-        education = Education.objects.get(institution_name=institution_name)
+        account = Account.objects.get(email=request.user)
+        education = Education.objects.get(institution_name=institution_name, account_email=account)
         serializer = EducationSerializer(education)
         return Response(serializer.data)
 
@@ -227,7 +229,8 @@ class UserProfessionalDetailCRUD(APIView):
 
     #READ
     def get(self, request, employer_name, format=None):
-        p = Professional.objects.get(employer_name=employer_name)
+        account = Account.objects.get(email=request.user)
+        p = Professional.objects.get(employer_name=employer_name, account_email=request.user)
         serializer = ProfessionalSerializer(p)
         return Response(serializer.data)
 

@@ -29,8 +29,8 @@ BRANCH = 'dev'
 DEBUG = True
 
 
-if (BRANCH == 'dev')
-{
+if (BRANCH == 'dev'):
+
     SECRET_KEY = 'django-insecure--4miyw_-w8w6o+eb$k2h@d8e@*cm_4=4g4%amy2pvpm%p5mtbm'
     DATABASES = {
         'default': {
@@ -38,17 +38,17 @@ if (BRANCH == 'dev')
             'NAME': BASE_DIR / 'db.sqlite3',
         }
     }
-}
 
-elif (BRANCH == 'main')
-{
+
+elif (BRANCH == 'main'):
+
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.postgressql_psycopg2',
             'NAME': 'info_api_app',
         }
     }
-}
+
 
 
 
