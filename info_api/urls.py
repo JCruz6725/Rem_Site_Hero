@@ -15,22 +15,18 @@ urlpatterns = [
     #project CRUD points
     path('project/', views.UserProjectList.as_view()),
     path('project/<str:project_name>', views.UserProjectDetailCRUD.as_view()),
-    
 
     #education CRUD points
     path('education/', views.UserEducationList.as_view()),
     path('education/<str:institution_name>', views.UserEducationDetailCRUD.as_view()),
 
-
     #professional CRUD points
     path('professional/', views.UserProfessionalList.as_view()),
     path('professional/<str:employer_name>', views.UserProfessionalDetailCRUD.as_view()),
 
-    #end point for all to view the profile and resume filter
+    #end point for [AllowAny] to view the profile and resume filter
     path('profile/<str:email>/', views.ProfileView.as_view()),
     path('profile/<str:email>/<str:title>', views.ProfileResumeView.as_view()),
-
-
 ]
 
 urlpatterns = format_suffix_patterns(urlpatterns)
