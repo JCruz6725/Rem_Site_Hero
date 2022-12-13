@@ -6,8 +6,9 @@
 // Top Level
 Table Account {
   //id int [pk, increment]
+  id int //DJANGO UUID
   full_name varchar
-  email email [pk]
+  email email
   location varchar
   username varchar
   
@@ -23,28 +24,32 @@ Table Account {
 
 // Level 2
 Table Resume {
-  account_email email [ref: > Account.email]
-  title varchar [pk]
+  user_id int [ref: > Account.id] //DJANGO UUID
+  id int //DJANGO UUID
+  
+  title varchar
   summary varchar
-  programming_skills varchar
-  industry_tools varchar
-  office_tools varchar
-  related_corses varchar
+  //programming_skills varchar
+  //industry_tools varchar
+  //office_tools varchar
+  //related_corses varchar
 }
 
-Table Project_{
-  account_email email [ref:  > Account.email]
-  resume_title varcharacter [ref: > Resume.title]
+Table Project{
+  user_id int [ref:  > Account.id] //DJANGO UUID
+  resume_id int [ref: > Resume.id] //DJANGO UUID
   
   project_name varchar //[ref: > Resume.project_xp_name]
-  title_on_project varchar
+  //title_on_project varchar
   tech_used varchar
   summary varchar
   external_link varchar
 }
 
 Table Education {
-  account_email email [ref:  > Account.email]
+  user_id int [ref:  > Account.id] //DJANGO UUID
+  resume_id int [ref: > Resume.id] //DJANGO UUID
+  id int //DJANGO UUID 
   institution_name varchar
   degree varchar
   time_at varchar
@@ -54,8 +59,8 @@ Table Education {
 
 
 Table Professional_xp {
-  account_email email [ref:  > Account.email]
-  resume_title varchar [ref: > Resume.title]
+  user_id int [ref:  > Account.id]
+  resume_id int  [ref: > Resume.id]
   employer_name varchar //[ref: > Resume.professional_xp_name]
   position varchar
   time_at varchar
