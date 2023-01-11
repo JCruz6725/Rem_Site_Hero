@@ -5,7 +5,7 @@
 
 // Top Level
 Table Account {
-  //id int [pk, increment]
+  id int [pk, increment]
   full_name varchar
   email email [pk]
   location varchar
@@ -23,7 +23,10 @@ Table Account {
 
 // Level 2
 Table Resume {
-  account_email email [ref: > Account.email]
+  id int [pk, increment]
+
+  account_id int [ref: > Account.id]
+
   title varchar [pk]
   summary varchar
   programming_skills varchar
@@ -33,8 +36,10 @@ Table Resume {
 }
 
 Table Project_{
-  account_email email [ref:  > Account.email]
-  resume_title varcharacter [ref: > Resume.title]
+  id int [pk, increment]
+
+  account_id int [ref:  > Account.id]
+  resume_id int [ref: > Resume.id]
   
   project_name varchar //[ref: > Resume.project_xp_name]
   title_on_project varchar
@@ -44,7 +49,11 @@ Table Project_{
 }
 
 Table Education {
-  account_email email [ref:  > Account.email]
+  id int [pk, increment]
+  
+  account_id int [ref:  > Account.id]
+  resume_id int [ref: > Resume.id]
+  
   institution_name varchar
   degree varchar
   time_at varchar
@@ -54,8 +63,11 @@ Table Education {
 
 
 Table Professional_xp {
-  account_email email [ref:  > Account.email]
-  resume_title varchar [ref: > Resume.title]
+  id int [pk, increment]
+  
+  account_id int [ref:  > Account.id]
+  resume_id int [ref: > Resume.id]
+  
   employer_name varchar //[ref: > Resume.professional_xp_name]
   position varchar
   time_at varchar
@@ -63,5 +75,6 @@ Table Professional_xp {
   tech_used varchar
   summary varchar
 }
+
 
 
