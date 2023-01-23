@@ -1,9 +1,5 @@
 //// https://dbdiagram.io/d
 
-//// -- LEVEL 1
-//// -- Tables and References
-
-// Top Level
 Table Account {
   //id int [pk, increment]
   id int //DJANGO UUID
@@ -22,20 +18,17 @@ Table Account {
 }
 
 
-// Level 2
 Table Resume {
   user_id int [ref: > Account.id] //DJANGO UUID
   id int //DJANGO UUID
   
   title varchar
   summary varchar
-  //programming_skills varchar
-  //industry_tools varchar
-  //office_tools varchar
-  //related_corses varchar
+   
 }
 
 Table Project{
+  id int 
   user_id int [ref:  > Account.id] //DJANGO UUID
   resume_id int [ref: > Resume.id] //DJANGO UUID
   
@@ -57,8 +50,8 @@ Table Education {
 }
 
 
-
 Table Professional_xp {
+  id int
   user_id int [ref:  > Account.id]
   resume_id int  [ref: > Resume.id]
   employer_name varchar //[ref: > Resume.professional_xp_name]
@@ -68,5 +61,3 @@ Table Professional_xp {
   tech_used varchar
   summary varchar
 }
-
-
